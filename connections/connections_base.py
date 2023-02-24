@@ -1,5 +1,5 @@
-from connections import queue, queueNoThread
-import exceptions as e
+from ..connections import queue, queueNoThread
+from .. import exceptions as e
 
 # Defines the base of a device
 class deviceBase(object):
@@ -149,7 +149,7 @@ class device(deviceBase):
     # ReturnLines (int): The number of lines it expects to receive from the device
     # WaitTime (float): The time in seconds to wait before reading
     def _sendCommand(self, Command, WriteArgs = set(), WriteKwargs = dict(), ReadArgs = set(), ReadKwargs = dict(), ResponseCheck = None, ReturnLines = 1, WaitTime = 0):
-        import functions as f
+        from .. import functions as f
         
         # Check if it is empty
         if self.empty:

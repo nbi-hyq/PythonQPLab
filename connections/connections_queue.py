@@ -1,5 +1,5 @@
 import threading as th
-import exceptions as e
+from .. import exceptions as e
 
 # Implements a queue system while allowing plotting interactions by the user
 class queue(th.Thread):

@@ -1,4 +1,4 @@
-import exceptions as e
+from .. import exceptions as e
 
 # A base setting class
 class baseSetting:
@@ -390,7 +390,7 @@ class equipment(object):
     # Device (connections.device): The device to add
     # Ignore (bool): If True then it will not close this device
     def addDevice(self, Device, Ignore = False):
-        import connections as c
+        from .. import connections as c
         
         if not isinstance(Device, c.deviceBase):
             raise e.TypeDefError("Device", Device, c.deviceBase)
@@ -429,7 +429,7 @@ class setup(object):
     # SettingFinalizers (settingFinalizer): The setting finalizers to add after initialization
     def __init__(self, Equipment, *args, SettingName = "default", Tags = [], Settings = setting(), SettingHandlers = settingHandler(), SettingFinalizers = settingFinalizer(), **kwargs):
         import weakref
-        import connections as c
+        from .. import connections as c
         
         super().__init__(*args, **kwargs)
         
@@ -474,7 +474,7 @@ class setup(object):
     # Adds a laser to the laser list
     # Laser (equipment.laser): The laser to add
     def addLaser(self, Laser):
-        import equipment as eq
+        from .. import equipment as eq
         
         if not isinstance(Laser, eq.laser):
             raise e.TypeDefError("Laser", Laser, eq.laser)
@@ -493,7 +493,7 @@ class setup(object):
     # Adds a power controller to the PowerControl list
     # PowerControl (equipment.powerControl): The power controller to add
     def addPowerControl(self, PowerControl):
-        import equipment as eq
+        from .. import equipment as eq
         
         if not isinstance(PowerControl, eq.powerControl):
             raise e.TypeDefError("PowerControl", PowerControl, eq.powerControl)
@@ -532,8 +532,8 @@ class setup(object):
     # Device (equipment.device): The device to add
     # Ignore (bool): If True then it will not clsoe the device
     def addDevice(self, Device, Ignore = False):
-        import equipment as eq
-        import connections as c
+        from .. import equipment as eq
+        from .. import connections as c
         
         if not (isinstance(Device, eq.device) or isinstance(Device, c.deviceBase)):
             raise e.TypeDefError("Device", Device, c.deviceBase)
