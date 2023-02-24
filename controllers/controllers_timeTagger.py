@@ -1,5 +1,5 @@
-import connections as c
-import exceptions as e
+from .. import connections as c
+from .. import exceptions as e
 
 # Controls the time tagger
 class timeTagger(c.external):
@@ -55,7 +55,7 @@ class timeTagger(c.external):
     # Sampler (TimeTagger aquisition class): A class with .isRunning() and .startFor(IntTime) function
     # IntegrationTime (float): The integration time in seconds
     def _sample(self, Sampler, IntegrationTime):
-        import functions as f
+        from .. import functions as f
         
         IntegrationTime = float(IntegrationTime)
 
@@ -601,7 +601,7 @@ class timeTagger(c.external):
     def _getData(self):
         import time
         import numpy as np
-        import functions as f
+        from .. import functions as f
         
         # Wait for data to finish
         RemainTime = self._streamEnd - time.time()

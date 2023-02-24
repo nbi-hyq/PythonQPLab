@@ -1,4 +1,4 @@
-from connections import device
+from ..connections import device
     
 # Class to control a dll controled device
 class dll(device):

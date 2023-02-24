@@ -1,5 +1,5 @@
-import connections as c
-import exceptions as e
+from .. import connections as c
+from .. import exceptions as e
 
 # A sequence for an FPGA
 class FPGASequence:
@@ -550,7 +550,7 @@ class timeBandit(c.serial):
     # Byte (int): The byte to set, must be smaller than 256
     # UseQueue (bool): Whether to run the command through the queue or not, ignored if the device was initialized with UseQueue = False
     def updateMemory(self, Address, Byte, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         # Convert to bytes and write
         self.sendCommand(int(Address % 256).to_bytes(1, "little") + int(Byte).to_bytes(1, "little"), ReturnLines = 2, ResponseCheck = f.responseCheck.timeBanditUpdate(), **kwargs)
@@ -592,7 +592,7 @@ class timeBandit(c.serial):
     # Resynchronizes the FPGA to the external clock
     # UseQueue (bool): Whether to run the command through the queue or not, ignored if the device was initialized with UseQueue = False
     def resync(self, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         # Write the message and check for response
         self.sendCommand(b"\x01\x01", ReturnLines = 2, ResponseCheck = f.responseCheck.timeBanditHandShake(), **kwargs)

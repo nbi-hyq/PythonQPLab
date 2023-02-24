@@ -1,5 +1,5 @@
-import connections as c
-from controllers import rotationStage
+from .. import connections as c
+from ..controllers import rotationStage
 
 # A controller for the KDC cube rotation cage
 class kinesisRotationStage(rotationStage, c.external):

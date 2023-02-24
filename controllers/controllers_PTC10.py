@@ -1,5 +1,5 @@
-import connections as c
-from controllers import PID
+from .. import connections as c
+from ..controllers import PID
 
 # A PTC10 controller class
 class PTC10(PID, c.serial): # Look at page 94 in manual
@@ -52,7 +52,7 @@ class PTC10(PID, c.serial): # Look at page 94 in manual
     # Name (str): The name of the system (EOM, ET1 or ET2 for ColdLab), if None then it uses the self.name
     # UseQueue (bool): True if it should use the command queue    
     def _setParameter(self, Parameter, Value, GetFunction, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         ResponseKwargs = kwargs.copy()
         ResponseKwargs["UseQueue"] = False
@@ -64,7 +64,7 @@ class PTC10(PID, c.serial): # Look at page 94 in manual
     # Name (str): The name of the system (EOM, ET1 or ET2 for ColdLab), if None then it uses the self.name
     # UseQueue (bool): True if it should use the command queue    
     def _getParameter(self, Param, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         kwargs["ResponseCheck"] = f.responseCheck.getValue()
         return float(self._sendNamedCommand(f"{Param}?", **kwargs))
@@ -162,7 +162,7 @@ class PTC10(PID, c.serial): # Look at page 94 in manual
     # Name (str): The name of the system (EOM, ET1 or ET2 for ColdLab), if None then it uses the self.name
     # UseQueue (bool): True if it should use the command queue    
     def start(self, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         ResponseKwargs = kwargs.copy()
         ResponseKwargs["UseQueue"] = False
@@ -173,7 +173,7 @@ class PTC10(PID, c.serial): # Look at page 94 in manual
     # Name (str): The name of the system (EOM, ET1 or ET2 for ColdLab), if None then it uses the self.name
     # UseQueue (bool): True if it should use the command queue    
     def stop(self, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         ResponseKwargs = kwargs.copy()
         ResponseKwargs["UseQueue"] = False
@@ -184,7 +184,7 @@ class PTC10(PID, c.serial): # Look at page 94 in manual
     # Name (str): The name of the system (EOM, ET1 or ET2 for ColdLab), if None then it uses the self.name
     # UseQueue (bool): True if it should use the command queue    
     def status(self, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         kwargs["ResponseCheck"] = f.responseCheck.inList(["Off", "On", "Follow"])
         ReturnString = self._sendNamedCommand("A.PID.mode?", **kwargs)

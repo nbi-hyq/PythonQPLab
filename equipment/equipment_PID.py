@@ -1,5 +1,5 @@
-import exceptions as e
-from equipment import device
+from .. import exceptions as e
+from ..equipment import device
 
 # A generic PID class with logging
 class PID(device):
@@ -9,8 +9,8 @@ class PID(device):
     # DeviceName (str): The name of the device
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, Device, *args, WhiteSpaceIn = 0.1, WhiteSpaceOut = 0.1, **kwargs):
-        import controllers
-        import loggers
+        from .. import controllers
+        from .. import loggers
         
         if not "DeviceName" in kwargs:
             kwargs["DeviceName"] = "TempArduino"

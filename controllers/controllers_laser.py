@@ -1,4 +1,4 @@
-import exceptions as e
+from .. import exceptions as e
 
 # A generic class to control lasers, cannot be used on its own
 class laser:

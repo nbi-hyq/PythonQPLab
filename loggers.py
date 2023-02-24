@@ -20,7 +20,7 @@ class PIDLogger(object):
         import os
         from datetime import datetime
         import threading as th
-        from .. import plotting
+        from . import plotting
         
         # Make sure variables have correct types
         File = str(File)
@@ -110,7 +110,7 @@ class PIDLogger(object):
     # StopEvent (threading.Event): The event to signal to stop the logging if it is set
     def _log(self, File, MaxTime = 0, Period = 1, DataArgs = tuple(), DataKwargs = dict(), Plot = None, KeepFigure = True, StopEvent = None):
         import time
-        from .. import functions as fu
+        from . import functions as fu
         
         Count = int(MaxTime / Period)
         

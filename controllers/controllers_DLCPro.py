@@ -1,6 +1,6 @@
-import connections as c
-import exceptions as e
-from controllers import laser
+from .. import connections as c
+from .. import exceptions as e
+from ..controllers import laser
 
 # Class to control a CTL
 class DLCPro(laser, c.socket):
@@ -24,7 +24,7 @@ class DLCPro(laser, c.socket):
     # DeviceName (str): The name of the device, only used for error messages
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, *args, FrequencyControl = True, SettleTime = 25, SleepTime = 0.01, InitWait = 0.05, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         if not "WavelengthRange" in kwargs and not "FrequencyRange" in kwargs:
             kwargs["WavelengthRange"] = (910, 990)
@@ -101,7 +101,7 @@ class DLCPro(laser, c.socket):
     # Command (str): The command to send
     # UseQueue (bool): Whether to run the command through the queue or not
     def sendCommand(self, Command, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         kwargs["ReturnLines"] = 1
         
@@ -166,7 +166,7 @@ class DLCPro(laser, c.socket):
     # UseQueue (bool): Whether to run the command through the queue or not
     def setWavelength(self, Value, **kwargs):
         import time
-        import functions as f
+        from .. import functions as f
         
         if not self._allowFrequency:
             raise e.ImplementationError("DLCPro.setWavelength")

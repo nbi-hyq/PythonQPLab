@@ -1,5 +1,5 @@
-import connections as c
-import exceptions as e
+from .. import connections as c
+from .. import exceptions as e
 
 # Controls the keithly
 class keithly(c.visa):
@@ -38,7 +38,7 @@ class keithly(c.visa):
     # Parameter (str): The parameter to retrieve
     # UseQueue (bool): True if it should use the command queue    
     def _getParameter(self, Parameter, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         kwargs["ResponseCheck"] = f.responseCheck.default()
         return self.query(f"print({Parameter})", **kwargs)
@@ -47,7 +47,7 @@ class keithly(c.visa):
     # Parameter (str): The parameter to retrieve
     # UseQueue (bool): True if it should use the command queue    
     def _getValue(self, Parameter, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         kwargs["ResponseCheck"] = f.responseCheck.getValue()
         return float(self.query(f"print({Parameter})", **kwargs))

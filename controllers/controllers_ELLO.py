@@ -1,6 +1,6 @@
-import connections as c
-import exceptions as e
-from controllers import rotationStage
+from .. import connections as c
+from .. import exceptions as e
+from ..controllers import rotationStage
 
 # A controller for an ELLO control board
 class ELLOControl(c.external):

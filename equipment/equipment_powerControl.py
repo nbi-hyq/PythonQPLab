@@ -1,5 +1,5 @@
-import exceptions as e
-from equipment import device
+from .. import exceptions as e
+from ..equipment import device
 
 # Allows for power control of a laser
 class powerControl(device):
@@ -15,7 +15,7 @@ class powerControl(device):
     # DeviceName (str): The name of the device
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, PID, Powermeter, TimeBanditChannel, *args, PowerRangeFactor = 1.3, PowerTolerance = 0.01, MinPowerTolerance = 1e-9, LockAttempts = 20, LockDelay = 0.2, **kwargs):
-        import controllers
+        from .. import controllers
         
         # Make sure the types are correct
         if not isinstance(PID, controllers.powerPID):
@@ -70,7 +70,7 @@ class powerControl(device):
     # UseQueue (bool): Whether to run the command through the queue or not, ignored if the device was initialized with UseQueue = False
     def lock(self, **kwargs):
         import numpy as np
-        import functions as f
+        from .. import functions as f
         
         Value = self._setPower
         

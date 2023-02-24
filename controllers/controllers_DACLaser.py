@@ -1,6 +1,6 @@
-import connections as c
-import exceptions as e
-from controllers import laser, DAC
+from .. import connections as c
+from .. import exceptions as e
+from ..controllers import laser, DAC
 
 # A laser class controlled by a DAC
 class DACLaser(laser, c.deviceBase): # If used with the equipment.laser remember to set the JumpAttempts to 0

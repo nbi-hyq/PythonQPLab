@@ -1,5 +1,5 @@
-from connections import device, deviceBase
-import exceptions as e
+from ..connections import device, deviceBase
+from .. import exceptions as e
 
 # Controls a socket connection
 class socket(device):
@@ -154,7 +154,7 @@ class socketClient(socket):
     # ResponseCheck (Func): A function to check if the response was correct, None if no check should be used, the function must have the arguments (Class, Command, ReturnString) and must return None on succes or a string on failure with the error message
     # WaitTime (float): The time in seconds to wait before reading
     def sendCommand(self, *args, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         # Set the return lines to be 1
         kwargs["ReturnLines"] = 1

@@ -1,5 +1,5 @@
-import connections as c
-from controllers import PID
+from .. import connections as c
+from ..controllers import PID
 
 # Used to control a power controller PID
 class powerPID(PID, c.serial):
@@ -49,7 +49,7 @@ class powerPID(PID, c.serial):
     # Type (type): The type to cast to
     # UseQueue (bool): Whether to run the command through the queue or not
     def _setParameter(self, Parameter, Value, Type, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         Parameter = str(Parameter)
         
@@ -65,7 +65,7 @@ class powerPID(PID, c.serial):
     # Parameter (str): The name of the parameter to get
     # UseQueue (bool): Whether to run the command through the queue or not
     def _getParameter(self, Parameter, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         Parameter = str(Parameter)
         
@@ -183,7 +183,7 @@ class powerPID(PID, c.serial):
     # Get the status
     # UseQueue (bool): Whether to run the command through the queue or not
     def status(self, **kwargs):     
-        import functions as f
+        from .. import functions as f
         
         # Ask for status and get result
         kwargs["ResponseCheck"] = f.responseCheck.default(Line = 1)
@@ -192,7 +192,7 @@ class powerPID(PID, c.serial):
     # Start the PID
     # UseQueue (bool): Whether to run the command through the queue or not
     def start(self, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         # Send the command to run and get result
         kwargs["ResponseCheck"] = f.responseCheck.matchReturn("PID RUN", Line = 1)
@@ -201,7 +201,7 @@ class powerPID(PID, c.serial):
     # Stop the PID
     # UseQueue (bool): Whether to run the command through the queue or not
     def stop(self, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         # Send command and receive answer
         kwargs["ResponseCheck"] = f.responseCheck.matchReturn("PID STOP", Line = 1)

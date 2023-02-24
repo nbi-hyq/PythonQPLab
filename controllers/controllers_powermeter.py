@@ -1,4 +1,4 @@
-import exceptions as e
+from .. import exceptions as e
 
 # A generic powermeter class
 class powermeter:
@@ -46,7 +46,7 @@ class powermeter:
     # SleepTime (float): The time to sleep between each point
     def getPowerMulti(self, Count, SleepTime = 0, **kwargs):
         import numpy as np
-        import functions as f
+        from .. import functions as f
         
         Count = int(Count)
         SleepTime = float(SleepTime)

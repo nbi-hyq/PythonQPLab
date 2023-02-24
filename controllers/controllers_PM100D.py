@@ -1,5 +1,5 @@
-import connections as c
-from controllers import powermeter
+from .. import connections as c
+from ..controllers import powermeter
 
 # Controls the powermeter
 class PM100D(powermeter, c.visa):
@@ -37,7 +37,7 @@ class PM100D(powermeter, c.visa):
     # Parameter (str): The parameter to get
     # UseQueue (bool): True if it should use the command queue    
     def _getBool(self, Parameter, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         kwargs["ResponseCheck"] = f.responseCheck.getBool()
         return bool(self.query(f"{Parameter}?", **kwargs))
@@ -46,7 +46,7 @@ class PM100D(powermeter, c.visa):
     # Parameter (str): The parameter to get
     # UseQueue (bool): True if it should use the command queue    
     def _getFloat(self, Parameter, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         kwargs["ResponseCheck"] = f.responseCheck.getNumber()
         return float(self.query(f"{Parameter}?", **kwargs))

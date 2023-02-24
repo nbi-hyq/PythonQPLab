@@ -1,5 +1,5 @@
-import exceptions as e
-from equipment import PID
+from .. import exceptions as e
+from ..equipment import PID
 
 # Controls a tempArduino PID and implements logging for it        
 class tempArduino(PID):
@@ -9,7 +9,7 @@ class tempArduino(PID):
     # DeviceName (str): The name of the device
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, Device, *args, **kwargs):
-        import controllers as c
+        from .. import controllers as c
 
         if not isinstance(Device, c.tempArduino):
             raise e.TypeDefError("Temperature Arduino", Device, c.tempArduino)

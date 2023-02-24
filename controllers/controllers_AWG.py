@@ -1,5 +1,5 @@
-import connections as c
-import exceptions as e
+from .. import connections as c
+from .. import exceptions as e
 
 # A sequence for the AWG
 class AWGSequence:

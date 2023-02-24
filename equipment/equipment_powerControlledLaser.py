@@ -1,5 +1,5 @@
-import exceptions as e
-from equipment import device, laser, powerControl
+from .. import exceptions as e
+from ..equipment import device, laser, powerControl
 
 # The controller for a power controlled laser
 class powerControlledLaser(device):

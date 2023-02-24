@@ -1,4 +1,4 @@
-import exceptions as e
+from .. import exceptions as e
 
 # A generic rotation stage controller
 class rotationStage:   

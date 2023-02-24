@@ -1,4 +1,4 @@
-import connections as c
+from .. import connections as c
 
 # Controller for a wavemeter
 class WM(c.dll):

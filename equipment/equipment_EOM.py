@@ -1,5 +1,5 @@
-import exceptions as e
-from equipment import device, powerControl
+from .. import exceptions as e
+from ..equipment import device, powerControl
 
 # A minimizer for the EOM
 class EOM(device):
@@ -21,8 +21,8 @@ class EOM(device):
     # DeviceName (str): The name of the device
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, PowerControl, TimeTagger, DACController, DACChannel, *args, VoltageGuess = 3.4, ScanRange = 4 / 5, ScanPoints = 20, IntegrationTime = 0.1, RepetitionCount = 5, MaxAttempts = 100, Gate = None, InitialPause = 0.3, ScanPause = 0.1, Figsize = (8, 8), ShowBuffer = 0.1, **kwargs):
-        import controllers as c
-        import plotting
+        from .. import controllers as c
+        from .. import plotting
         
         if not "DeviceName" in kwargs:
             kwargs["DeviceName"] = "EOM"
@@ -76,7 +76,8 @@ class EOM(device):
     # UseQueue (bool): Whether to run the command through the queue or not, ignored if the device was initialized with UseQueue = False
     def minimize(self, MeasureFunc, InitFunc = None, ExitFunc = None, **kwargs):
         import numpy as np
-        import plotting
+        from .. import plotting
+        from .. import functions as f
                 
         # Run initialization function
         if InitFunc is not None:
@@ -90,9 +91,7 @@ class EOM(device):
         Success = False
         BestVoltage = self._voltageGuess
         
-        for _ in range(self._maxAttempts):
-            import functions as f
-            
+        for _ in range(self._maxAttempts):            
             # Start plotting
             self._plot.reset()
 

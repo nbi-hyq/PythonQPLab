@@ -1,5 +1,5 @@
-import connections as c
-from controllers import PID
+from .. import connections as c
+from ..controllers import PID
 
 # Controls the temperature arduino
 class tempArduino(PID, c.serial):
@@ -28,7 +28,7 @@ class tempArduino(PID, c.serial):
     # Value (float): The value of the parameter
     # UseQueue (bool): True if it should use the command queue    
     def _setParameter(self, Parameter, Value, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         kwargs["ResponseCheck"] = f.responseCheck.default()
         return self.query(f"{Parameter}{float(Value)}", **kwargs)
@@ -103,7 +103,7 @@ class tempArduino(PID, c.serial):
     # Returns a dictionary with all of the values
     # UseQueue (bool): True if it should use the command queue    
     def getStatus(self, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         kwargs["ReturnLines"] = 9
         kwargs["ResponseCheck"] = f.responseCheck.default()

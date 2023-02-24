@@ -66,14 +66,14 @@ class queue(th.Thread):
     # Waits for an item to finish, still allows interactive plotting
     # ID (int): The ID of the item
     def wait(self, ID):
-        import functions as f
+        from .. import functions as f
         
         while self._q[ID] is not None:
             f.time.sleep(self._waitTime)
             
     def run(self):
         import warnings
-        import functions as f
+        from .. import functions as f
        
         while True:
             # If there is no task

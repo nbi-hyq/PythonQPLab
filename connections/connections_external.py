@@ -1,4 +1,4 @@
-from connections import device
+from ..connections import device
     
 # A controller for a device which is controlled by other python functions
 class external(device):

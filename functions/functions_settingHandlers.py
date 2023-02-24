@@ -1,12 +1,12 @@
-import exceptions as e
+from .. import exceptions as e
 
 # Creates a setting handler for a keithly
 # Keithly (controllers.keithly): The keithly device to control
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
 def keithly(Keithly, Name = "", Overwrites = dict()):
-    import lab
-    import controllers as c
+    from .. import lab
+    from .. import controllers as c
     
     if not isinstance(Keithly, c.keithly):
         raise e.TypeDefError("Keithly", Keithly, c.keithly)
@@ -35,8 +35,8 @@ def keithly(Keithly, Name = "", Overwrites = dict()):
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
 def laser(Laser, Lockable = True, Name = "", Overwrites = dict()):
-    import lab
-    import equipment as q
+    from .. import lab
+    from .. import equipment as q
 
     if not isinstance(Laser, q.laser):
         raise e.TypeDefError("Laser", Laser, q.laser)
@@ -70,8 +70,8 @@ def laser(Laser, Lockable = True, Name = "", Overwrites = dict()):
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
 def power(PowerControl, Name = "", Overwrites = dict()):
-    import lab
-    import equipment as q
+    from .. import lab
+    from .. import equipment as q
 
     if not isinstance(PowerControl, q.powerControl):
         raise e.TypeDefError("PowerControl", PowerControl, q.powerControl)
@@ -104,8 +104,8 @@ def power(PowerControl, Name = "", Overwrites = dict()):
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
 def PCLaser(Laser, Lockable = True, Name = "", Overwrites = dict()):
-    import lab
-    import equipment as q
+    from .. import lab
+    from .. import equipment as q
 
     if not isinstance(Laser, q.powerControlledLaser):
         raise e.TypeDefError("Laser", Laser, q.powerControlledLaser)
@@ -147,8 +147,8 @@ def PCLaser(Laser, Lockable = True, Name = "", Overwrites = dict()):
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
 def rotationStage(RotationStage, Name = "", Overwrites = dict()):
-    import lab
-    import controllers as c
+    from .. import lab
+    from .. import controllers as c
 
     if not isinstance(RotationStage, c.rotationStage):
         raise e.TypeDefError("RotationStage", RotationStage, c.rotationStage)
@@ -174,8 +174,8 @@ def rotationStage(RotationStage, Name = "", Overwrites = dict()):
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
 def timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict()):
-    import lab
-    import controllers as c
+    from .. import lab
+    from .. import controllers as c
     
     if not isinstance(TimeTagger, c.timeTagger):
         raise e.TypeDefError("TimeTagger", TimeTagger, c.timeTagger)
@@ -251,8 +251,8 @@ def timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict()):
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
 def SNSPD(SNSPD, ChannelCount, Name = "", Overwrites = dict()):
-    import lab
-    import controllers as c
+    from .. import lab
+    from .. import controllers as c
     
     if not isinstance(SNSPD, c.SNSPD):
         raise e.TypeDefError("SNSPD", SNSPD, c.SNSPD)
@@ -279,8 +279,8 @@ def SNSPD(SNSPD, ChannelCount, Name = "", Overwrites = dict()):
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
 def timeBandit(FPGA, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = dict()):
-    import lab
-    import equipment as q
+    from .. import lab
+    from .. import equipment as q
     
     if not isinstance(FPGA, q.timeBandit):
         raise e.TypeDefError("FPGA", FPGA, q.timeBandit)
@@ -306,8 +306,8 @@ def timeBandit(FPGA, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = 
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
 def AWG(Device, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = dict()):
-    import lab
-    import equipment as q
+    from .. import lab
+    from .. import equipment as q
     
     if not isinstance(Device, q.AWG):
         raise e.TypeDefError("Device", Device, q.AWG)

@@ -78,7 +78,7 @@ class livePlot:
     # Pauses while allowing to still use the plot
     # Time (float): The time to pause
     def pause(self, Time):
-        from .. import functions as f
+        from . import functions as f
         f.time.sleep(Time)
         
     # Resets the plot to the inital state
@@ -112,7 +112,7 @@ class histogram(livePlot):
     def __init__(self, xValues, *args, GateCount = 0, Gates = [], History = 10, GateShowBuffer = 0.1, BaseSize = (8, 4), GatesPerRow = 2, BackgroundMode = "off", Title = "Histogram", xLabel = "Time (ns)", yLabel = "Counts", GateTitles = None, GateXLabels = None, GateYLabels = None, GatePrecision = None, GateFontSize = 40, **kwargs):
         import numpy as np
         import matplotlib.pyplot as plt
-        from .. import exceptions as e
+        from . import exceptions as e
 
         BackgroundMode = str(BackgroundMode).lower()
         
@@ -373,7 +373,7 @@ class plot(livePlot):
         
     # Initializes the plot
     def _init(self, Shapes, AxID = None, Colors = None, BackgroundModes = None, Labels = None, Titles = "", xLabels = "", yLabels = ""):
-        from .. import exceptions as e
+        from . import exceptions as e
         import numpy as np
 
         # Set the ax ID

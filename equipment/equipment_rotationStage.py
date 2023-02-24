@@ -1,6 +1,6 @@
-import exceptions as e
-import controllers as c
-from equipment import device
+from .. import exceptions as e
+from .. import controllers as c
+from ..equipment import device
 
 # A generic rotation stage
 class rotationStage(device, c.rotationStage):
@@ -9,7 +9,7 @@ class rotationStage(device, c.rotationStage):
     # DeviceName (str): The name of the device
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, Device, *args, ZeroPos = 0, **kwargs):
-        import controllers as c
+        from .. import controllers as c
         
         if not "DeviceName" in kwargs:
             kwargs["DeviceName"] = "Rotation Stage"

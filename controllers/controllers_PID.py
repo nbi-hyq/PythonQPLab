@@ -1,4 +1,4 @@
-import exceptions as e
+from .. import exceptions as e
 
 # Used to control a PID
 class PID:

@@ -1,5 +1,5 @@
-import exceptions as e
-from equipments import device
+from .. import exceptions as e
+from ..equipments import device
 
 # Adds plotting to the AWG
 class AWG(device):
@@ -8,8 +8,8 @@ class AWG(device):
     # DeviceName (str): The name of the device
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, Device, *args, Figsize = (8, 4), **kwargs):
-        import plotting as pl
-        import controllers as c
+        from .. import plotting as pl
+        from .. import controllers as c
 
         if not "DeviceName" in kwargs:
             kwargs["DeviceName"] = "AWG"

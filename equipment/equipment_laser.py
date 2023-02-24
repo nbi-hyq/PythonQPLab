@@ -1,5 +1,5 @@
-import exceptions as e
-from equipment import device
+from .. import exceptions as e
+from ..equipment import device
 
 # Combines a laser with a wavementer to make locking possible
 class laser(device):
@@ -16,7 +16,7 @@ class laser(device):
     # DeviceName (str): The name of the device
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, Laser, Wavemeter, *args, Redshift = 0, LockInterval = 0.2, LockWait = 0.1, LockTolerance = 10e-6, LockSlope = 3804, LockSlopeRange = (2000, 4000), PiezoAttempts = 100, JumpAttempts = 4, **kwargs):
-        import controllers
+        from .. import controllers
         
         # Make sure types are correct
         if not isinstance(Laser, controllers.laser):
@@ -58,7 +58,7 @@ class laser(device):
     # Value (float): The frequency to lock at    
     # UseQueue (bool): Whether to run the command through the queue or not, ignored if the device was initialized with UseQueue = False
     def setLockFrequencyPersistent(self, Value, **kwargs):
-        import functions as f
+        from .. import functions as f
         
         # Make sure it is locking
         if not self.isLocking():
@@ -124,6 +124,8 @@ class laser(device):
     # Count: The counter in the timer
     # UseQueue (bool): Whether to run the command through the queue or not, ignored if the device was initialized with UseQueue = False
     def _lockFunction(self, Count, **kwargs):            
+        from .. import functions as f
+
         # Go through jump loop
         Stable = False
         
@@ -136,9 +138,7 @@ class laser(device):
                 break
             
             # Try with piezo
-            for _ in range(self._piezoAttempts):
-                import functions as f
-                
+            for _ in range(self._piezoAttempts):                
                 # Make sure the slope is valid
                 if self._lockSlope < self._lockSlopeRange[0] or self._lockSlope > self._lockSlopeRange[1]:
                     self._lockSlope = (self._lockSlopeRange[0] + self._lockSlopeRange[1]) / 2

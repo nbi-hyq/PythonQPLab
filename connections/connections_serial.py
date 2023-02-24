@@ -1,4 +1,4 @@
-from connections import device
+from ..connections import device
 
 # Class to control a serial device
 class serial(device):
@@ -73,6 +73,7 @@ class serial(device):
     # Opens a device
     def open(self, Port, Baudrate = 9600, Timeout = 1):
         import serial
+        
         self._serial = serial.Serial(port = Port, baudrate = Baudrate, timeout = Timeout, write_timeout = Timeout)
     
     # Close the device
