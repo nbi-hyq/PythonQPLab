@@ -132,7 +132,7 @@ Subclasses livePlot
 
 ---
 
-### method update(Bins, GateValues, BinsBackground = None, GateValuesBackground = None)
+### method update(Bins, GateValues = [], BinsBackground = None, GateValuesBackground = None)
 
 Updates the plot with new values
 

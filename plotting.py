@@ -218,7 +218,7 @@ class histogram(livePlot):
     # GateValues (list): A list of the values for each of the gates
     # BinsBackground (numpy.ndarray): The background values for each of the bins, if not given then it will use the previous value, should only be given if background mode is not "off"
     # GateValuesBackground (list): A list of the background values for each of the gates if not given then it will use the previous value, should only be given if background mode is not "off"
-    def update(self, Bins, GateValues, BinsBackground = None, GateValuesBackground = None):
+    def update(self, Bins, GateValues = [], BinsBackground = None, GateValuesBackground = None):
         import numpy as np
 
         if GateValuesBackground is None:
