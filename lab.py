@@ -652,11 +652,11 @@ class setup(object):
     # Args (set): The args forthe function
     # Kwargs (dict): The kwargs for the function
     def scheduleScript(self, Function, Args, Kwargs):
-        self._scheduleQueue.call((Function, Args, Kwargs))
+        self._scheduleQueue.call(Function, Args = Args, Kwargs = Kwargs, Wait = False)
         
     # Prints to the consol when it is done with scripts
     def ping(self):
-        self._scheduleQueue.call((print, ("Pinged script scheduler",)))
+        self._scheduleQueue.call(print, Args = ("Pinged script scheduler",), Wait = False)
         
     # Gets the number of scripts in the queue
     def scriptQueueSize(self):
