@@ -2,7 +2,7 @@ from ..connections import queue, queueNoThread
 from .. import exceptions as e
 
 # Defines the base of a device
-class deviceBase(object):
+class deviceBase:
     # DeviceName (str): The name of the device, only used for error messages
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, *args, DeviceName = "Device", ID = None, **kwargs):

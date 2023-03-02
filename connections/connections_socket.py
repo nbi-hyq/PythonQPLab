@@ -373,7 +373,7 @@ class socketServer(deviceBase):
         
         
 # Methods for a socket server
-class serverFunction(object):
+class serverFunction:
     # SetFunction (func): The function to run when setting a parameter, the function must take the parameters (Message [str], Data [list])
     # GetFunction (func): The function to run when getting a parameter, the function must take the parameters (Data [list])
     # ToggleFunction (func): The function to run when toggling a parameter, the function must take the parameters (Data [list])
