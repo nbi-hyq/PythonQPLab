@@ -5,7 +5,7 @@ from .. import exceptions as e
 class queue(th.Thread):
     # MaxLength (int): The maximum length of the queue
     # WaitInterval (float): The time in seconds to wait between checking for updates
-    def __init__(self, *args, MaxLength = 1000, WaitInterval = 0.01, **kwargs):
+    def __init__(self, *args, MaxLength = 1000, WaitInterval = 0.001, **kwargs):
         import weakref
         
         super().__init__(*args, **kwargs)
@@ -32,7 +32,7 @@ class queue(th.Thread):
         Return = [None]
 
         # Make sure Function is a callable
-        if not callable(Function):
+        if not (callable(Function) or Function == "kill"):
             raise e.TypeDefError("Function", Function, "callable")
             
         Args = tuple(Args)
@@ -44,7 +44,7 @@ class queue(th.Thread):
         if self._q[ID] is not None:
             raise e.QueueError()
         
-        self._putPos = (self._putPos + 1) % self.size
+        self._putPos = (self._putPos + 1) % self._size
         
         # Put the item
         self._q[ID] = (Function, Args, Kwargs, Return)
@@ -67,9 +67,10 @@ class queue(th.Thread):
     # ID (int): The ID of the item
     def wait(self, ID):
         from .. import functions as f
+        import time
         
         while self._q[ID] is not None:
-            f.time.sleep(self._waitTime)
+            time.sleep(self._waitTime)
             
     def run(self):
         import warnings

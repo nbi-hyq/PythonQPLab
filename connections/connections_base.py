@@ -256,7 +256,7 @@ class device(deviceBase):
     # WaitTime (float): The time in seconds to wait before reading
     def sendCommand(self, Command, *args, UseQueue = True, **kwargs):
         if UseQueue:
-            return self._q.call((self._sendCommand, (Command,) + args, kwargs), Wait = True)
+            return self._q.call(self._sendCommand, Args = (Command,) + args, Kwargs = kwargs, Wait = True)
             
         else:
             return self._sendCommand(Command, *args, **kwargs)

@@ -2727,7 +2727,7 @@ Returns (Timestamps (list of float), Channels (list of int)) where Timestamps is
 ---
 ---
 
-## AWG(IP, DefaultChannel = 1, TriggerLevel = 0.4, TriggerDelay = 0, MaxSampleFrequency = 6.16, ChannelCount = 4, Timeout = 1, ReconnectTries = 100, ReconnectDelay = 1, MaxAttempts = 100, AttemptDelay = 1, UseQueue = True, Empty = False, DeviceName = "AWG", ID = None)
+## AWG(IP, DefaultChannel = 1, TriggerLevel = 0.4, TriggerDelay = 0, MaxSampleFrequency = 12.32, ChannelCount = 4, OperatingMode = "RF", Timeout = 1, ReconnectTries = 100, ReconnectDelay = 1, MaxAttempts = 100, AttemptDelay = 1, UseQueue = True, Empty = False, DeviceName = "AWG", ID = None)
 
 Controller for an Active Technologies AWG
 
@@ -2737,6 +2737,7 @@ Controller for an Active Technologies AWG
 - TriggerDelay (float): The delay of the trigger in seconds
 - MaxSampleFrequency (float): The maximum allowed sampling frequency
 - ChannelCount (int): The number of channels
+- OperatingMode (str): The operating mode of the device
 - Timeout (float): The timeout time for the connection, must not be negative
 - ReconnectTries (int): How many times to attempt to reconnect if it disconnects, must not be smaller than 0
 - ReconnectDelay (float): The delay in seconds between each reconnect attempt, must not be negative

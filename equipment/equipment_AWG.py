@@ -1,5 +1,5 @@
 from .. import exceptions as e
-from ..equipments import device
+from ..equipment import device
 
 # Adds plotting to the AWG
 class AWG(device):
@@ -31,7 +31,8 @@ class AWG(device):
         self._plotPhase = pl.renewPlot(1, Shapes, Labels = Labels, Figsize = Figsize, Titles = "AWG sequence phase", xLabels = "Time (ns)", yLabels = "Phase")
         
     def _close(self):
-        self._plot.close()
+        self._plotAmplitude.close()
+        self._plotPhase.close()
         super()._close()
         
     # Shows the sequences

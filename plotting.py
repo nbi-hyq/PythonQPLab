@@ -162,7 +162,7 @@ class histogram(livePlot):
     # Initializes the plot
     def _init(self, xValues, GateCount = 0, Gates = [], History = 10, BackgroundMode = "off", Title = "Histogram", xLabel = "Time (ns)", yLabel = "Counts", GateXLabels = None, GateYLabels = None):
         import numpy as np
-        
+
         self._showValues = 0
 
         # Plot the histogram
@@ -313,7 +313,7 @@ class plot(livePlot):
     def __init__(self, MaxSize, AxCount, Shapes, *args, AxID = None, Colors = None, BackgroundModes = None, Labels = None, Figsize = (8, 8), Titles = "", xLabels = "", yLabels = "", ShowBuffers = 0.1, **kwargs):
         import matplotlib.pyplot as plt
         import numpy as np
-        
+
         AxCount = int(AxCount)
                 
         # Get the number of plots and the settings            

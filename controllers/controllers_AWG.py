@@ -210,7 +210,7 @@ class AWG(c.visa):
     # Empty (bool): If True then it will not communicate with the device
     # DeviceName (str): The name of the device, only used for error messages
     # ID (str): The ID name for the device, only used for displaying infomation
-    def __init__(self, IP, *args, DefaultChannel = 1, TriggerLevel = 0.4, TriggerDelay = 0, MaxSampleFrequency = 6.16, ChannelCount = 4, **kwargs):
+    def __init__(self, IP, *args, DefaultChannel = 1, TriggerLevel = 0.4, TriggerDelay = 0, MaxSampleFrequency = 12.32, ChannelCount = 4, OperatingMode = "RF", **kwargs):
         if not "DeviceName" in kwargs:
             kwargs["DeviceName"] = "AWG"
             
@@ -227,7 +227,8 @@ class AWG(c.visa):
         self.sendWithoutResponse("DISPlay:UNIT:VOLT AMPLitudeoff")
         self.sendWithoutResponse("AWGControl:DECreasing DECIMation")
         self.sendWithoutResponse("AWGControl:INCreasing INTERpolation")
-        self.syncTrigger(TriggerLevel, TriggerDelay = TriggerDelay)
+        self.setTriggerValues(TriggerLevel, TriggerDelay = TriggerDelay)
+        self.setOperatingMode(OperatingMode)
         self.reset()
         
     def write(self, Message, WaveformData = None):
