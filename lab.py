@@ -424,10 +424,7 @@ class setup(object):
     # Equipment (equipment): The devices of the lab
     # SettingName (str): The ID of the settings of this class
     # Tags (list of str): A list of all the tags the Equipment must possess
-    # Settings (setting): The settings to apply after initialization
-    # SettingHandlers (settingHandler): The setting handlers to add after initialization
-    # SettingFinalizers (settingFinalizer): The setting finalizers to add after initialization
-    def __init__(self, Equipment, *args, SettingName = "default", Tags = [], Settings = setting(), SettingHandlers = settingHandler(), SettingFinalizers = settingFinalizer(), **kwargs):
+    def __init__(self, Equipment, *args, SettingName = "default", Tags = [], **kwargs):
         import weakref
         from . import connections as c
         
@@ -458,11 +455,7 @@ class setup(object):
         self._settingsFinalizer = settingFinalizer()
         self._currentSettings = setting()
         self._appliedSettings = setting()
-        
-        self.addSettingHandlers(SettingHandlers)
-        self.addSettingFinalizers(SettingFinalizers)
-        self.applySettings(Settings)
-        
+                
         # Create a schedule queue for scripts
         self._scheduleQueue = c.queue()
                 

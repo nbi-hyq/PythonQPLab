@@ -99,16 +99,13 @@ The list of devices
 ---
 ---
 
-## setup(Equipment, SettingName = "default", Tags = [], Settings = setupSetting(), SettingHandlers = setupSettingHandler(), SettingFinalizers = settingFinalizer())
+## setup(Equipment, SettingName = "default", Tags = [])
 
 A setup class for a specific configuration of the lab, the equipment object must be created first and then scripts should run equipment through the setup object instead of the equipment object. Setup does not do anything to the controllers and can just be reloaded whenever or changed out. Preferably a new setup class is created for each type of experiment
 
 - Equipment (equipment): The devices of the lab
 - SettingName (str): The ID of the settings of this class
 - Tags (list of str): A list of all the tags the Equipment must possess
-- Settings (setupSetting): The settings to apply after initialization
-- SettingHandlers (setupSettingHandler): The setting handlers to add after initialization
-- SettingFinalizers (settingFinalizer): The setting finalizers to add after initialization
 
 ---
 
