@@ -2,7 +2,7 @@ from .. import connections as c
 from .. import exceptions as e
 
 # Controls the SNSPD
-class SNSPD(c.socketClient):
+class photonSpot(c.socketClient):
     # IP (str): The IP of the socket connection
     # Group (str): A or B, the detector group to use
     # BufferSize (int): The size of the buffer when getting data

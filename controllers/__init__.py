@@ -12,7 +12,7 @@ from .controllers_DLCPro import DLCPro
 from .controllers_DACLaser import DACLaser
 from .controllers_rigol import rigol
 from .controllers_timeBandit import FPGASequence, FPGAChannel, FPGAChannelPulse, FPGAChannelPhasedPulse, timeBandit
-from .controllers_SNSPD import SNSPD
+from .controllers_photonSpot import photonSpot
 from .controllers_rotationStage import rotationStage
 from .controllers_kinesisRotationStage import kinesisRotationStage
 from .controllers_ELLO import ELLOControl, ELLO
