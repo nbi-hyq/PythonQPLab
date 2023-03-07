@@ -311,12 +311,12 @@ Adds setting finalizers
 
 ---
 
-### method scheduleScript(Function, Args, Kwargs)
+### method scheduleScript(Function, Args = tuple(), Kwargs = dict())
 
 Schedules a script to be run
 
 - Function (callable): The function running the script
-- Args (set): The args forthe function
+- Args (tuple): The args for the function
 - Kwargs (dict): The kwargs for the function
 
 ---
