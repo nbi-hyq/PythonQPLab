@@ -254,8 +254,8 @@ def SNSPD(SNSPD, ChannelCount, Name = "", Overwrites = dict()):
     from .. import lab
     from .. import controllers as c
     
-    if not isinstance(SNSPD, c.SNSPD):
-        raise e.TypeDefError("SNSPD", SNSPD, c.SNSPD)
+    if not isinstance(SNSPD, c.photonSpot):
+        raise e.TypeDefError("SNSPD", SNSPD, c.photonSpot)
     
     # Set up the handlers
     Handler = lab.settingHandler()

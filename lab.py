@@ -642,9 +642,9 @@ class setup(object):
                 
     # Schedules a script to be run
     # Function (callable): The function running the script
-    # Args (set): The args forthe function
+    # Args (tuple): The args forthe function
     # Kwargs (dict): The kwargs for the function
-    def scheduleScript(self, Function, Args, Kwargs):
+    def scheduleScript(self, Function, Args = tuple(), Kwargs = dict()):
         self._scheduleQueue.call(Function, Args = Args, Kwargs = Kwargs, Wait = False)
         
     # Prints to the consol when it is done with scripts

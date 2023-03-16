@@ -49,7 +49,7 @@ class device(deviceBase):
     # OpenKwargs (dict): Arguments sent to open
     # DeviceName (str): The name of the device, only used for error messages
     # ID (str): The ID name for the device, only used for displaying infomation
-    def __init__(self, *args, ReconnectTries = 100, ReconnectDelay = 1, MaxAttempts = 100, AttemptDelay = 1, UseQueue = True, ForceClose = False, Empty = False, OpenArgs = set(), OpenKwargs = dict(), **kwargs):
+    def __init__(self, *args, ReconnectTries = 10, ReconnectDelay = 1, MaxAttempts = 10, AttemptDelay = 1, UseQueue = True, ForceClose = False, Empty = False, OpenArgs = set(), OpenKwargs = dict(), **kwargs):
         super().__init__(*args, **kwargs)
             
         # Set default values
