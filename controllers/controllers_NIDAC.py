@@ -2,7 +2,7 @@ from .. import connections as c
 from .. import exceptions as e
 
 # Controls a DAC
-class DAC(c.external):
+class NIDAC(c.external):
     # Name (str): The name of the device to connect to
     # InputChannels (list of int): A list of all the input channels to use, may be empty
     # OutputChannels (list of int): A list of all the output channels to use, may be empty, must have the same length as VoltageLimits

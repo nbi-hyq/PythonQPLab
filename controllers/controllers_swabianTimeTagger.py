@@ -2,7 +2,7 @@ from .. import connections as c
 from .. import exceptions as e
 
 # Controls the time tagger
-class timeTagger(c.external):
+class swabianTimeTagger(c.external):
     # DefaultChannel (int): The default channel to get data from
     # DefaultIntegrationTime (float): The default integration time in seconds
     # ClockChannel (int): The default clock channel

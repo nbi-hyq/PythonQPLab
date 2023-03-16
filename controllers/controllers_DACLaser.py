@@ -1,6 +1,6 @@
 from .. import connections as c
 from .. import exceptions as e
-from ..interface import laser, DAC
+from ..interface import laser, NIDAC
 
 # A laser class controlled by a DAC
 class DACLaser(laser, c.deviceBase): # If used with the equipment.laser remember to set the JumpAttempts to 0
@@ -11,8 +11,8 @@ class DACLaser(laser, c.deviceBase): # If used with the equipment.laser remember
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, DACController, Channel, *args, **kwargs):
         # Make sure it is a DAC
-        if not isinstance(DACController, DAC):
-            raise e.TypeDefError("DACController", DACController, DAC)
+        if not isinstance(DACController, NIDAC):
+            raise e.TypeDefError("DACController", DACController, NIDAC)
         
         # Set the voltage range
         if not "VoltageRange" in kwargs:

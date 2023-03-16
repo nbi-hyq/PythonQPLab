@@ -23,8 +23,8 @@ class laser(device):
         if not isinstance(Laser, interface.laser):
             raise e.TypeDefError("Laser", Laser, interface.laser)
             
-        if not isinstance(Wavemeter, controllers.WM):
-            raise e.TypeDefError("Wavemeter", Wavemeter, controllers.WM)
+        if not isinstance(Wavemeter, controllers.highFinesseWM):
+            raise e.TypeDefError("Wavemeter", Wavemeter, controllers.highFinesseWM)
             
         if not "DeviceName" in kwargs:
             kwargs["DeviceName"] = "Laser"

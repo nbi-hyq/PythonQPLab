@@ -1,7 +1,7 @@
 from .. import connections as c
 
 # Controller for a wavemeter
-class WM(c.dll):
+class highFinesseWM(c.dll):
     # DLLPath (str): The path to the dll to load
     # Channel (int): The default channel to use, can be set with the setChannel method
     # UseQueue (bool): If True then it will set up a queue which can be used in the sendCommand method, if False the UseQueue in sendCommand is ignored

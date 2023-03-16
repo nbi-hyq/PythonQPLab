@@ -1141,7 +1141,7 @@ Returns a numpy array with the data
 ---
 ---
 
-## WM(DLLPath, Channel = 1, UseQueue = True, Empty = False, DeviceName = "Wavelength Meter", ID = None)
+## highFinesseWM(DLLPath, Channel = 1, UseQueue = True, Empty = False, DeviceName = "Wavelength Meter", ID = None)
 
 Controller for a wavemeter
 
@@ -1207,7 +1207,7 @@ Sets the default channel to use
 ---
 ---
 
-## DAC(Name, InputChannels = [], OutputChannels = [], VoltageLimits = [], Timeout = 1, UseQueue = True, Empty = False, DeviceName = "DAC", ID = None)
+## NIDAC(Name, InputChannels = [], OutputChannels = [], VoltageLimits = [], Timeout = 1, UseQueue = True, Empty = False, DeviceName = "DAC", ID = None)
 
 Controls a DAC
 
@@ -2373,7 +2373,7 @@ Moves the rotation stage relative to its original position
 ---
 ---
 
-## timeTagger(DefaultChannel = 1, DefaultIntegrationTime = 1, ClockChannel = 1, DefaultGates = [], BinWidth = 4, DefaultCorrelationBins = 2500, UseQueue = True, Empty = False, DeviceName = "TimeTagger", ID = None)
+## swabianTimeTagger(DefaultChannel = 1, DefaultIntegrationTime = 1, ClockChannel = 1, DefaultGates = [], BinWidth = 4, DefaultCorrelationBins = 2500, UseQueue = True, Empty = False, DeviceName = "TimeTagger", ID = None)
 
 Controls the time tagger
 

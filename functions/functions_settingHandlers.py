@@ -148,10 +148,10 @@ def PCLaser(Laser, Lockable = True, Name = "", Overwrites = dict()):
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
 def rotationStage(RotationStage, Name = "", Overwrites = dict()):
     from .. import lab
-    from .. import controllers as c
+    from .. import interface
 
-    if not isinstance(RotationStage, c.rotationStage):
-        raise e.TypeDefError("RotationStage", RotationStage, c.rotationStage)
+    if not isinstance(RotationStage, interface.rotationStage):
+        raise e.TypeDefError("RotationStage", RotationStage, interface.rotationStage)
     
     # Set up the handlers
     Handler = lab.settingHandler()
@@ -177,8 +177,8 @@ def timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict()):
     from .. import lab
     from .. import controllers as c
     
-    if not isinstance(TimeTagger, c.timeTagger):
-        raise e.TypeDefError("TimeTagger", TimeTagger, c.timeTagger)
+    if not isinstance(TimeTagger, c.swabianTimeTagger):
+        raise e.TypeDefError("TimeTagger", TimeTagger, c.swabianTimeTagger)
     
     # Set up the handlers
     Handler = lab.settingHandler()
@@ -250,7 +250,7 @@ def timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict()):
 # ChannelCount (int): The number of channels accessable
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
-def SNSPD(SNSPD, ChannelCount, Name = "", Overwrites = dict()):
+def photonSpot(SNSPD, ChannelCount, Name = "", Overwrites = dict()):
     from .. import lab
     from .. import controllers as c
     

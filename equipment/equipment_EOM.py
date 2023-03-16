@@ -35,8 +35,8 @@ class EOM(device):
         if not isinstance(TimeTagger, c.timeTagger):
             raise e.TypeDefError("TimeTagger", TimeTagger, c.timeTagger)
             
-        if not isinstance(DACController, c.DAC):
-            raise e.TypeDefError("DACController", DACController, c.DAC)
+        if not isinstance(DACController, c.NIDAC):
+            raise e.TypeDefError("DACController", DACController, c.NIDAC)
             
         self._powerControl = PowerControl
         self._timeTagger = TimeTagger
