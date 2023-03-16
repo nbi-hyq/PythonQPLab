@@ -1,6 +1,6 @@
 from .. import connections as c
 from .. import exceptions as e
-from ..controllers import laser
+from ..interface import laser
 
 # Class to control a CTL
 class DLCPro(laser, c.socket):

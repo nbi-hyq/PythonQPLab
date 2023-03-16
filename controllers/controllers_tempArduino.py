@@ -1,5 +1,5 @@
 from .. import connections as c
-from ..controllers import PID
+from ..interface import PID
 
 # Controls the temperature arduino
 class tempArduino(PID, c.serial):

@@ -1,5 +1,5 @@
 from .. import connections as c
-from ..controllers import PID
+from ..interface import PID
 
 # A PTC10 controller class
 class PTC10(PID, c.serial): # Look at page 94 in manual

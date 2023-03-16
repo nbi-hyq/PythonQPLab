@@ -9,15 +9,15 @@ class rotationStage(device, c.rotationStage):
     # DeviceName (str): The name of the device
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, Device, *args, ZeroPos = 0, **kwargs):
-        from .. import controllers as c
+        from .. import interface
         
         if not "DeviceName" in kwargs:
             kwargs["DeviceName"] = "Rotation Stage"
         
         super().__init__(*args, **kwargs)
         
-        if not isinstance(Device, c.rotationStage):
-            raise e.TypeDefError("Device", Device, c.rotationStage)
+        if not isinstance(Device, interface.rotationStage):
+            raise e.TypeDefError("Device", Device, interface.rotationStage)
         
         # Save the device
         self.device = Device

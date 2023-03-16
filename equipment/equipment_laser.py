@@ -17,10 +17,11 @@ class laser(device):
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, Laser, Wavemeter, *args, Redshift = 0, LockInterval = 0.2, LockWait = 0.1, LockTolerance = 10e-6, LockSlope = 3804, LockSlopeRange = (2000, 4000), PiezoAttempts = 100, JumpAttempts = 4, **kwargs):
         from .. import controllers
+        from .. import interface
         
         # Make sure types are correct
-        if not isinstance(Laser, controllers.laser):
-            raise e.TypeDefError("Laser", Laser, controllers.laser)
+        if not isinstance(Laser, interface.laser):
+            raise e.TypeDefError("Laser", Laser, interface.laser)
             
         if not isinstance(Wavemeter, controllers.WM):
             raise e.TypeDefError("Wavemeter", Wavemeter, controllers.WM)

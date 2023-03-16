@@ -16,13 +16,14 @@ class powerControl(device):
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, PID, Powermeter, *args, TimeBanditChannel = None, PowerRangeFactor = 1.3, PowerTolerance = 0.01, MinPowerTolerance = 1e-9, LockAttempts = 20, LockDelay = 0.2, **kwargs):
         from .. import controllers
+        from .. import interface
         
         # Make sure the types are correct
-        if not isinstance(PID, controllers.powerPID):
-            raise e.TypeDefError("PID", PID, controllers.powerPID)
+        if not isinstance(PID, interface.powerPID):
+            raise e.TypeDefError("PID", PID, interface.powerPID)
             
-        if not isinstance(Powermeter, controllers.powermeter):
-            raise e.TypeDefError("Powermeter", Powermeter, controllers.powermeter)
+        if not isinstance(Powermeter, interface.powermeter):
+            raise e.TypeDefError("Powermeter", Powermeter, interface.powermeter)
             
         if TimeBanditChannel is not None and not isinstance(TimeBanditChannel, controllers.FPGAChannel):
             raise e.TypeDefError("TimeBanditChannel", TimeBanditChannel, controllers.FPGAChannel)

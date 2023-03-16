@@ -11,14 +11,15 @@ class PID(device):
     def __init__(self, Device, *args, WhiteSpaceIn = 0.1, WhiteSpaceOut = 0.1, **kwargs):
         from .. import controllers
         from .. import loggers
+        from .. import interface
         
         if not "DeviceName" in kwargs:
             kwargs["DeviceName"] = "TempArduino"
         
         super().__init__(*args, **kwargs)
         
-        if not isinstance(Device, controllers.PID):
-            raise e.TypeDefError("PID", Device, controllers.PID)
+        if not isinstance(Device, interface.PID):
+            raise e.TypeDefError("PID", Device, interface.PID)
         
         # Save the settings
         self.device = Device

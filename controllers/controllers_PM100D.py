@@ -1,5 +1,5 @@
 from .. import connections as c
-from ..controllers import powermeter
+from ..interface import powermeter
 
 # Controls the powermeter
 class PM100D(powermeter, c.visa):

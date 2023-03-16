@@ -1,5 +1,5 @@
 from .. import connections as c
-from ..controllers import PID
+from ..interface import PID
 
 # Used to control a power controller PID
 class powerPID(PID, c.serial):
