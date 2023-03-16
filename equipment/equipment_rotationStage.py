@@ -1,16 +1,14 @@
 from .. import exceptions as e
-from .. import controllers as c
+from .. import interface
 from ..equipment import device
 
 # A generic rotation stage
-class rotationStage(device, c.rotationStage):
+class rotationStage(device, interface.rotationStage):
     # Device (controllers.rotationStage): The rotation stage device
     # ZeroPos (float): The real position when the device is at position 0
     # DeviceName (str): The name of the device
     # ID (str): The ID name for the device, only used for displaying infomation
     def __init__(self, Device, *args, ZeroPos = 0, **kwargs):
-        from .. import interface
-        
         if not "DeviceName" in kwargs:
             kwargs["DeviceName"] = "Rotation Stage"
         

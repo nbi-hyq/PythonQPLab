@@ -1,6 +1,7 @@
 from .. import connections as c
 from .. import exceptions as e
-from ..interface import laser, NIDAC
+from ..interface import laser
+from ..controllers import NIDAC
 
 # A laser class controlled by a DAC
 class DACLaser(laser, c.deviceBase): # If used with the equipment.laser remember to set the JumpAttempts to 0

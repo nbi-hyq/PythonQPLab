@@ -19,8 +19,8 @@ class powerControl(device):
         from .. import interface
         
         # Make sure the types are correct
-        if not isinstance(PID, interface.powerPID):
-            raise e.TypeDefError("PID", PID, interface.powerPID)
+        if not isinstance(PID, controllers.powerPID):
+            raise e.TypeDefError("PID", PID, controllers.powerPID)
             
         if not isinstance(Powermeter, interface.powermeter):
             raise e.TypeDefError("Powermeter", Powermeter, interface.powermeter)

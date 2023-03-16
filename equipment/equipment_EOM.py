@@ -32,8 +32,8 @@ class EOM(device):
         if not isinstance(PowerControl, powerControl):
             raise e.TypeDefError("Powermeter", PowerControl, powerControl)
 
-        if not isinstance(TimeTagger, c.timeTagger):
-            raise e.TypeDefError("TimeTagger", TimeTagger, c.timeTagger)
+        if not isinstance(TimeTagger, c.swabianTimeTagger):
+            raise e.TypeDefError("TimeTagger", TimeTagger, c.swabianTimeTagger)
             
         if not isinstance(DACController, c.NIDAC):
             raise e.TypeDefError("DACController", DACController, c.NIDAC)
