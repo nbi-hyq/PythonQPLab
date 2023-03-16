@@ -173,7 +173,7 @@ The wavemeter object
 ---
 ---
 
-## powerControl(PID, Powermeter, TimeBanditChannel, PowerRangeFactor = 1.3, PowerTolerance = 0.01, MinPowerTolerance = 1e-9, LockAttempts = 20, LockDelay = 0.2, DeviceName = "Power Control", ID = None)
+## powerControl(PID, Powermeter, TimeBanditChannel = None, PowerRangeFactor = 1.3, PowerTolerance = 0.01, MinPowerTolerance = 1e-9, LockAttempts = 20, LockDelay = 0.2, DeviceName = "Power Control", ID = None)
 
 Allows for power control of a laser path
 

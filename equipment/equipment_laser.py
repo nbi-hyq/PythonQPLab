@@ -190,7 +190,7 @@ class laser(device):
     # Locks the frequency
     # UseQueue (bool): Whether to run the command through the queue or not, ignored if the device was initialized with UseQueue = False
     def lock(self, **kwargs):
-        import connections
+        from .. import connections
         
         # Unlock if needed
         self.unlock()

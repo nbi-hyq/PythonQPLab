@@ -402,7 +402,7 @@ class plot(livePlot):
                 raise e.KeywordError("BackgroundMode", BackgroundMode, Valid = ["on", "off", "subtract", "subtract_only", "subtract_noback"])
 
             # Turn color into correct shape
-            if isinstance(Color, str):
+            if isinstance(Color, str) or Color is None:
                 Color = (Color,) * 3
 
             if BackgroundMode != "subtract_only":

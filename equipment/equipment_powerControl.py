@@ -14,7 +14,7 @@ class powerControl(device):
     # LockDelay (float): The time in seconds between each locking attempt
     # DeviceName (str): The name of the device
     # ID (str): The ID name for the device, only used for displaying infomation
-    def __init__(self, PID, Powermeter, TimeBanditChannel, *args, PowerRangeFactor = 1.3, PowerTolerance = 0.01, MinPowerTolerance = 1e-9, LockAttempts = 20, LockDelay = 0.2, **kwargs):
+    def __init__(self, PID, Powermeter, *args, TimeBanditChannel = None, PowerRangeFactor = 1.3, PowerTolerance = 0.01, MinPowerTolerance = 1e-9, LockAttempts = 20, LockDelay = 0.2, **kwargs):
         from .. import controllers
         
         # Make sure the types are correct
@@ -24,7 +24,7 @@ class powerControl(device):
         if not isinstance(Powermeter, controllers.powermeter):
             raise e.TypeDefError("Powermeter", Powermeter, controllers.powermeter)
             
-        if not isinstance(TimeBanditChannel, controllers.FPGAChannel):
+        if TimeBanditChannel is not None and not isinstance(TimeBanditChannel, controllers.FPGAChannel):
             raise e.TypeDefError("TimeBanditChannel", TimeBanditChannel, controllers.FPGAChannel)
 
         if not "DeviceName" in kwargs:
