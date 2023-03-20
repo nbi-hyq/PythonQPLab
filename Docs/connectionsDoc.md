@@ -77,6 +77,12 @@ Kills the queue thread after evaluating all leftover items in the queue
 
 ---
 
+### method killCurrent()
+
+Attempts to kill the current task, it will only work if the task has implemented a kill function, it runs Task.kill()
+
+---
+
 ### method isAlive()
 
 Returns True if the queue is still alive, False if it has been stopped or scheduled to be stopped

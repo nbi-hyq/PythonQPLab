@@ -460,7 +460,7 @@ class FPGAChannelPhasedPulse(FPGAChannel):
     def _update(self, Start, Stop, i, **kwargs):
         # Get the pulse information bits
         UseStart = (int(Start) - 1) % (self.FPGA.getSequenceLength() * self.FPGA.getClocksPerBase())
-        UseStop = (int(Stop) + 1) % (self.FPGA.getSequenceLength() * self.FPGA.getClocksPerBase())
+        UseStop = (int(Stop) - 1) % (self.FPGA.getSequenceLength() * self.FPGA.getClocksPerBase())
         
         # Update memory
         self.FPGA.updateMemory2(self._memoryOffset + 4 * i, UseStart, **kwargs)

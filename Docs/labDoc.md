@@ -321,6 +321,12 @@ Schedules a script to be run
 
 ---
 
+### method killCurrentScript()
+
+Kills the current scripts if it is implemented, runs the Script.kill() method
+
+---
+
 ### method ping()
 
 Prints to the consol when it is done with scripts

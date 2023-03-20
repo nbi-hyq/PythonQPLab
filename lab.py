@@ -647,6 +647,9 @@ class setup(object):
     def scheduleScript(self, Function, Args = tuple(), Kwargs = dict()):
         self._scheduleQueue.call(Function, Args = Args, Kwargs = Kwargs, Wait = False)
         
+    def killCurrentScript(self):
+        self._scheduleQueue.killCurrent()
+        
     # Prints to the consol when it is done with scripts
     def ping(self):
         self._scheduleQueue.call(print, Args = ("Pinged script scheduler",), Wait = False)

@@ -91,10 +91,13 @@ class queue(th.Thread):
                 
             # Run a function
             try:
+                self._currentTask = Task[0]
                 Result = Task[0](*Task[1], **Task[2])
+                self._currentTask = None
                 State = True
                 
             except Exception as ErrorMes:
+                self._currentTask = None
                 Warn = e.PropagationError(ErrorMes, "processing an item in the queue")
                 warnings.warn(Warn.message)
                 Result = ErrorMes
@@ -112,6 +115,14 @@ class queue(th.Thread):
         if self.isAlive():
             self._alive = False
             self.call("kill", Wait = False)
+            
+    # Kills the current task
+    def killCurrent(self):
+        try:
+            self._currentTask.kill()
+            
+        except:
+            pass
             
     # Checks if the queue is alive
     def isAlive(self):
@@ -180,6 +191,10 @@ class queueNoThread:
     def kill(self):
         if self.isAlive():
             self._alive = False
+            
+    # Not used
+    def killCurrent(self):
+        pass
             
     # Checks if the queue is alive
     def isAlive(self):
