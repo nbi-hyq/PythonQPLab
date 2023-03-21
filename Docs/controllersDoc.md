@@ -1920,7 +1920,7 @@ Returns the invert clock as a bool
 ---
 ---
 
-## FPGAChannelPhasedPulse(FPGA, Channel, MemoryOffset, PhaseMemoryOffset, CalibrationData, *args, **kwargs)
+## FPGAChannelPhasedPulse(FPGA, Channel, MemoryOffset, PhaseMemoryOffset, TimeCalibration, PhaseCalibration, *args, **kwargs)
 
 A phased pulsed FPGA channel for the timeBandit.A maximum of 8 pulses are allowed and start/stop must be given in steps of 1/24 where 24/24 corresponding to a clock cycle (4 clock cycles per input pulse)
 
@@ -1928,7 +1928,8 @@ A phased pulsed FPGA channel for the timeBandit.A maximum of 8 pulses are allowe
 - Channel (int): The channel ID of this channel
 - MemoryOffset (int): The memory offset on the FPGA
 - PhaseMemoryOffset (int): The memory offset for 
-- CalibrationData (16-tuple of int): The phase calibration data
+- TimeCalibration (8x2 numpy.ndarray of int): The time calibration data
+- PhaseCalibration (8x4x2 numpy.ndarray of int): The phase calibration data
 
 Inherits from FPGAChannel
 
@@ -1947,12 +1948,13 @@ Exits calibration mode
 ---
 ---
 
-## timeBandit(Port, CalibrationData = (0,) * 16, Channel = 1, ClockFrequency = 50e6, ClocksPerBase = 4, Timeout = 1, ReconnectTries = 100, ReconnectDelay = 1, MaxAttempts = 100, AttemptDelay = 1, UseQueue = True, Empty = False, DeviceName = "TimeBandit", ID = None)
+## timeBandit(Port, TimeCalibration, PhaseCalibration, Channel = 1, ClockFrequency = 50e6, ClocksPerBase = 4, Timeout = 1, ReconnectTries = 100, ReconnectDelay = 1, MaxAttempts = 100, AttemptDelay = 1, UseQueue = True, Empty = False, DeviceName = "TimeBandit", ID = None)
 
 Controls the time bandit FPGA
 
 - Port (str): The name of the COM port through which to access the serial connection
-- CalibrationData (16-tuple of int): The calibration data for the phase channel
+- TimeCalibration (8x2 numpy.ndarray of int): The time calibration data
+- PhaseCalibration (8x4x2 numpy.ndarray of int): The phase calibration data
 - Channel (int): The default counter channel, must be 0 or 1
 - ClockFrequency (float): The frequency of the base clock
 - ClocksPerBase (int): The number of clock cycles per base clock

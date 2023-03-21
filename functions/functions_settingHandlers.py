@@ -55,10 +55,10 @@ def laser(Laser, Lockable = True, Name = "", Overwrites = dict()):
     def Activate(Value, **kwargs):
         if Lockable:
             if Value:
-                Laser.laser.lock(**kwargs)
+                Laser.lock(**kwargs)
                 
             else:
-                Laser.laser.unlock()
+                Laser.unlock()
             
     Handler[f"{Name}active"] = lab.handle(f"{Name}active", Activate, Overwrites = Overwrites.get("active", []))
         

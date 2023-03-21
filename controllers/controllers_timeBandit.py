@@ -441,7 +441,9 @@ class FPGAChannelPhasedPulse(FPGAChannel):
     # MemoryOffset (int): The memory offset on the FPGA
     # PhaseMemoryOffset (int): The memory offset for 
     # CalibrationData (16-tuple of int): The phase calibration data
-    def __init__(self, FPGA, Channel, MemoryOffset, PhaseMemoryOffset, CalibrationData, *args, **kwargs):
+    def __init__(self, FPGA, Channel, MemoryOffset, PhaseMemoryOffset, TimeCalibration, PhaseCalibration, *args, **kwargs):
+        import numpy as np
+        
         kwargs["ClockPartition"] = 24
         kwargs["ModeMemoryOffset"] = 32
         kwargs["MaxLength"] = 8
@@ -449,7 +451,8 @@ class FPGAChannelPhasedPulse(FPGAChannel):
         super().__init__(FPGA, Channel, MemoryOffset, *args, **kwargs)
         
         self._phaseMemoryOffset = int(PhaseMemoryOffset)
-        self._phaseCalibration = tuple(CalibrationData)
+        self._phaseCalibration = np.array(PhaseCalibration, dtype = int)
+        self._timeCalibration = np.array(TimeCalibration, dtype = int)
         self.stopCalibration()
         
     # Updates a single pulse
@@ -459,8 +462,13 @@ class FPGAChannelPhasedPulse(FPGAChannel):
     # UseQueue (bool): Whether to run the command through the queue or not, ignored if the device was initialized with UseQueue = False
     def _update(self, Start, Stop, i, **kwargs):
         # Get the pulse information bits
-        UseStart = (int(Start) - 1) % (self.FPGA.getSequenceLength() * self.FPGA.getClocksPerBase())
-        UseStop = (int(Stop) - 1) % (self.FPGA.getSequenceLength() * self.FPGA.getClocksPerBase())
+        if self._calibrationMode:
+            UseStart = (int(Start) - 1) % (self.FPGA.getSequenceLength() * self.FPGA.getClocksPerBase())
+            UseStop = (int(Stop) - 1) % (self.FPGA.getSequenceLength() * self.FPGA.getClocksPerBase())
+            
+        else:
+            UseStart = (int(Start) - 1 - self._timeCalibration[i, 0]) % (self.FPGA.getSequenceLength() * self.FPGA.getClocksPerBase())
+            UseStop = (int(Stop) - 1 - self._timeCalibration[i, 1]) % (self.FPGA.getSequenceLength() * self.FPGA.getClocksPerBase())
         
         # Update memory
         self.FPGA.updateMemory2(self._memoryOffset + 4 * i, UseStart, **kwargs)
@@ -472,8 +480,8 @@ class FPGAChannelPhasedPulse(FPGAChannel):
             PhaseStop = int((Stop % 1) * 256)
             
         else:
-            PhaseStart = self._phaseCalibration[2 * i] + int((Start % self.FPGA.getClocksPerBase()) * self.clockPartition)
-            PhaseStop = self._phaseCalibration[2 * i + 1] + int((Stop % self.FPGA.getClocksPerBase()) * self.clockPartition)
+            PhaseStart = self._phaseCalibration[i, int(Start) % self.FPGA.getClocksPerBase(), 0] + int((Start % self.FPGA.getClocksPerBase()) * self.clockPartition)
+            PhaseStop = self._phaseCalibration[i, int(Stop) % self.FPGA.getClocksPerBase(), 1] + int((Stop % self.FPGA.getClocksPerBase()) * self.clockPartition)
 
         # Update memory
         self.FPGA.updateMemory(self._phaseMemoryOffset + 2 * i, PhaseStart, **kwargs)
@@ -490,7 +498,8 @@ class FPGAChannelPhasedPulse(FPGAChannel):
 # Controls the time bandit FPGA
 class timeBandit(c.serial):
     # Port (str): The name of the COM port through which to access the serial connection
-    # CalibrationData (16-tuple of int): The calibration data for the phase channel
+    # TimeCalibration (8x2 numpy.ndarray of int): The time calibration data
+    # PhaseCalibration (8x4x2 numpy.ndarray of int): The phase calibration data
     # Channel (int): The default counter channel, must be 0 or 1
     # ClockFrequency (float): The frequency of the base clock
     # ClocksPerBase (int): The number of clock cycles per base clock
@@ -503,7 +512,7 @@ class timeBandit(c.serial):
     # Empty (bool): If True then it will not communicate with the device
     # DeviceName (str): The name of the device, only used for error messages
     # ID (str): The ID name for the device, only used for displaying infomation
-    def __init__(self, *args, CalibrationData = (0,) * 16, Channel = 1, ClockFrequency = 50e6, ClocksPerBase = 4, **kwargs):
+    def __init__(self, *args, TimeCalibration, PhaseCalibration, Channel = 1, ClockFrequency = 50e6, ClocksPerBase = 4, **kwargs):
         if not "DeviceName" in kwargs:
             kwargs["DeviceName"] = "TimeBandit"
             
@@ -523,7 +532,7 @@ class timeBandit(c.serial):
         
         # Add all of the channels
         self.CH = [None] * 7
-        self.CH[0] = FPGAChannelPhasedPulse(self, 0, 24, 8, CalibrationData)
+        self.CH[0] = FPGAChannelPhasedPulse(self, 0, 24, 8, TimeCalibration, PhaseCalibration)
         self.CH[1] = FPGAChannelPulse(self, 1, 57)
         self.CH[2] = FPGAChannelPulse(self, 2, 74)
         self.CH[3] = FPGAChannelPulse(self, 3, 91)
