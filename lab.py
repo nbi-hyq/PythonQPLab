@@ -171,6 +171,11 @@ class baseSetting:
 
 # Saves a setup setting
 class setting(baseSetting):        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self._sleepTime = 0
+    
     # Saves the setup to a file
     # Path (str): The path to save to
     # Overwrite (bool): If False then it will append _[NUM] to the file if it already exists
@@ -244,6 +249,23 @@ class setting(baseSetting):
         Setting = cls()
         Setting.load(Path, Relative = Relative)
         return Setting
+    
+    # Notes down when the pause is done
+    # Time (float): The time from now to do the pause
+    def addPause(self, Time):
+        import time
+        
+        self._sleepTime = max(self._sleepTime, time.time() + Time)
+        
+    # Does the pausing making sure that all pauses are respected
+    def pause(self):
+        import time
+        from .. import functions as f
+        
+        Time = self._sleepTime - time.time()
+        
+        if Time > 0:
+            f.time.sleep(Time)
 
             
 # Holds functions to handle any setting
@@ -299,14 +321,16 @@ class handle:
     # Key (str): The key for this handle
     # Function (callable): The function to run the handle, must take inputs (Value, UseQueue = True)
     # Overwrites (list of str): A list of all the settings to delete when handling a setting
+    # Pause (float): The time to pause after applying this setting
     # Order (int): If not None then it will wait until the end of the settings and then apply all the rest in order from lowest to highest
-    def __init__(self, Key, Function, *args, Overwrites = [], Order = None, **kwargs):
+    def __init__(self, Key, Function, *args, Overwrites = [], Pause = 0, Order = None, **kwargs):
         super().__init__(*args, **kwargs)
         
         self._f = Function
         self._overwrites = list(Overwrites)
         self._key = str(Key)
         self._order = Order
+        self._pause = float(Pause)
         
     # Processes an item
     # Settings (setting): The applied settings
@@ -324,6 +348,9 @@ class handle:
                 
             # Add setting
             Settings[self._key] = Value
+            
+            # Add pause
+            Settings.addPause(self._pause)
             
         if self._order is None:
             handleFunc()
@@ -604,6 +631,7 @@ class setup(object):
 
         # Post process
         self.postProcessSettings()
+        self._appliedSettings.pause()
         
     # Applies the settings which has an order, not needed if settings were applied with applySettings
     def postProcessSettings(self):

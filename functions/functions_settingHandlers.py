@@ -4,7 +4,8 @@ from .. import exceptions as e
 # Keithly (controllers.keithly): The keithly device to control
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
-def keithly(Keithly, Name = "", Overwrites = dict()):
+# Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
+def keithly(Keithly, Name = "", Overwrites = dict(), Pause = dict()):
     from .. import lab
     from .. import controllers as c
     
@@ -15,16 +16,16 @@ def keithly(Keithly, Name = "", Overwrites = dict()):
     Handler = lab.settingHandler()
     
     # Set current limit
-    Handler[f"{Name}currentLimit"] = lab.handle(f"{Name}currentLimit", Keithly.setCurrentLim, Overwrites = Overwrites.get("currentLimit", []))
+    Handler[f"{Name}currentLimit"] = lab.handle(f"{Name}currentLimit", Keithly.setCurrentLim, Overwrites = Overwrites.get("currentLimit", []), Pause = Pause.get("currentLimit", 0))
     
     # Set current range
-    Handler[f"{Name}currentRange"] = lab.handle(f"{Name}currentRange", Keithly.setCurrentRange, Overwrites = Overwrites.get("currentRange", []))
+    Handler[f"{Name}currentRange"] = lab.handle(f"{Name}currentRange", Keithly.setCurrentRange, Overwrites = Overwrites.get("currentRange", []), Pause = Pause.get("currentRange", 0))
     
     # Set voltage limit
-    Handler[f"{Name}voltageLimit"] = lab.handle(f"{Name}voltageLimit", Keithly.setVoltageLim, Overwrites = Overwrites.get("voltageLimit", []))
+    Handler[f"{Name}voltageLimit"] = lab.handle(f"{Name}voltageLimit", Keithly.setVoltageLim, Overwrites = Overwrites.get("voltageLimit", []), Pause = Pause.get("voltageLimit", 0))
     
     # Set voltage
-    Handler[f"{Name}voltage"] = lab.handle(f"{Name}voltage", Keithly.setVoltage, Overwrites = Overwrites.get("voltage", []))
+    Handler[f"{Name}voltage"] = lab.handle(f"{Name}voltage", Keithly.setVoltage, Overwrites = Overwrites.get("voltage", []), Pause = Pause.get("voltage", 0))
     
     return Handler
     
@@ -34,7 +35,8 @@ def keithly(Keithly, Name = "", Overwrites = dict()):
 # Lockable (bool): If false then it will not try to lock the frequence
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
-def laser(Laser, Lockable = True, Name = "", Overwrites = dict()):
+# Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
+def laser(Laser, Lockable = True, Name = "", Overwrites = dict(), Pause = dict()):
     from .. import lab
     from .. import equipment as q
 
@@ -49,7 +51,7 @@ def laser(Laser, Lockable = True, Name = "", Overwrites = dict()):
         Laser.setLaserFrequency(Value, **kwargs)
         Laser.setLockFrequency(Value)
     
-    Handler[f"{Name}frequency"] = lab.handle(f"{Name}frequency", SetLaserFrequency, Overwrites = Overwrites.get("frequency", []))
+    Handler[f"{Name}frequency"] = lab.handle(f"{Name}frequency", SetLaserFrequency, Overwrites = Overwrites.get("frequency", []), Pause = Pause.get("frequency", 0))
     
     # Activate
     def Activate(Value, **kwargs):
@@ -60,7 +62,7 @@ def laser(Laser, Lockable = True, Name = "", Overwrites = dict()):
             else:
                 Laser.unlock()
             
-    Handler[f"{Name}active"] = lab.handle(f"{Name}active", Activate, Overwrites = Overwrites.get("active", []))
+    Handler[f"{Name}active"] = lab.handle(f"{Name}active", Activate, Overwrites = Overwrites.get("active", []), Pause = Pause.get("active", 0))
         
     return Handler
 
@@ -69,7 +71,8 @@ def laser(Laser, Lockable = True, Name = "", Overwrites = dict()):
 # PowerControl (equipment.powerControl): The power controller to control
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
-def power(PowerControl, Name = "", Overwrites = dict()):
+# Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
+def power(PowerControl, Name = "", Overwrites = dict(), Pause = dict()):
     from .. import lab
     from .. import equipment as q
 
@@ -83,7 +86,7 @@ def power(PowerControl, Name = "", Overwrites = dict()):
     def SetPower(Value, **kwargs):
         PowerControl.setSetPower(Value)
         
-    Handler[f"{Name}power"] = lab.handle(f"{Name}power", SetPower, Overwrites = Overwrites.get("power", []))
+    Handler[f"{Name}power"] = lab.handle(f"{Name}power", SetPower, Overwrites = Overwrites.get("power", []), Pause = Pause.get("power", 0))
     
     # Activate
     def Activate(Value, **kwargs):
@@ -93,7 +96,7 @@ def power(PowerControl, Name = "", Overwrites = dict()):
         else:
             PowerControl.off(**kwargs)
             
-    Handler[f"{Name}active"] = lab.handle(f"{Name}active", Activate, Overwrites = Overwrites.get("active", []), Order = 0)
+    Handler[f"{Name}active"] = lab.handle(f"{Name}active", Activate, Overwrites = Overwrites.get("active", []), Pause = Pause.get("active", 0), Order = 0)
     
     return Handler
 
@@ -103,7 +106,8 @@ def power(PowerControl, Name = "", Overwrites = dict()):
 # Lockable (bool): If false then it will not try to lock the frequence
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
-def PCLaser(Laser, Lockable = True, Name = "", Overwrites = dict()):
+# Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
+def PCLaser(Laser, Lockable = True, Name = "", Overwrites = dict(), Pause = dict()):
     from .. import lab
     from .. import equipment as q
 
@@ -117,13 +121,13 @@ def PCLaser(Laser, Lockable = True, Name = "", Overwrites = dict()):
     def SetLaserFrequency(Value, **kwargs):
         Laser.laser.setLockFrequency(Value)
             
-    Handler[f"{Name}frequency"] = lab.handle(f"{Name}frequency", SetLaserFrequency, Overwrites = Overwrites.get("frequency", []))
+    Handler[f"{Name}frequency"] = lab.handle(f"{Name}frequency", SetLaserFrequency, Overwrites = Overwrites.get("frequency", []), Pause = Pause.get("frequency", 0))
     
     # Power
     def SetPower(Value, **kwargs):
         Laser.power.setSetPower(Value)
         
-    Handler[f"{Name}power"] = lab.handle(f"{Name}power", SetPower, Overwrites = Overwrites.get("power", []))
+    Handler[f"{Name}power"] = lab.handle(f"{Name}power", SetPower, Overwrites = Overwrites.get("power", []), Pause = Pause.get("power", 0))
     
     # Lock
     def Activate(Value, **kwargs):
@@ -137,7 +141,7 @@ def PCLaser(Laser, Lockable = True, Name = "", Overwrites = dict()):
                 Laser.laser.unlock()
             Laser.power.off(**kwargs)
             
-    Handler[f"{Name}active"] = lab.handle(f"{Name}active", Activate, Overwrites = Overwrites.get("active", []), Order = 0)
+    Handler[f"{Name}active"] = lab.handle(f"{Name}active", Activate, Overwrites = Overwrites.get("active", []), Pause = Pause.get("active", 0), Order = 0)
     
     return Handler
     
@@ -146,7 +150,8 @@ def PCLaser(Laser, Lockable = True, Name = "", Overwrites = dict()):
 # RotationStage (controllers.rotationStage): The stage to control
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
-def rotationStage(RotationStage, Name = "", Overwrites = dict()):
+# Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
+def rotationStage(RotationStage, Name = "", Overwrites = dict(), Pause = dict()):
     from .. import lab
     from .. import interface
 
@@ -160,10 +165,10 @@ def rotationStage(RotationStage, Name = "", Overwrites = dict()):
     def setZeroPos(Value, **kwargs):
         RotationStage.setZero(Value)
     
-    Handler[f"{Name}zeroPosition"] = lab.handle(f"{Name}zeroPosition", setZeroPos, Overwrites = Overwrites.get("zeroPosition", []))
+    Handler[f"{Name}zeroPosition"] = lab.handle(f"{Name}zeroPosition", setZeroPos, Overwrites = Overwrites.get("zeroPosition", []), Pause = Pause.get("zeroPosition", 0))
     
     # Position
-    Handler[f"{Name}position"] = lab.handle(f"{Name}position", RotationStage.moveTo, Overwrites = Overwrites.get("position", []))
+    Handler[f"{Name}position"] = lab.handle(f"{Name}position", RotationStage.moveTo, Overwrites = Overwrites.get("position", []), Pause = Pause.get("position", 0))
     
     return Handler
   
@@ -173,7 +178,8 @@ def rotationStage(RotationStage, Name = "", Overwrites = dict()):
 # ChannelCount (int): The number of channels accessable
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
-def timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict()):
+# Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
+def timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict(), Pause = dict()):
     from .. import lab
     from .. import controllers as c
     
@@ -184,19 +190,19 @@ def timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict()):
     Handler = lab.settingHandler()
     
     # Default channel
-    Handler[f"{Name}channel"] = lab.handle(f"{Name}channel", TimeTagger.setDefaultChannel, Overwrites = Overwrites.get("channel", []))
+    Handler[f"{Name}channel"] = lab.handle(f"{Name}channel", TimeTagger.setDefaultChannel, Overwrites = Overwrites.get("channel", []), Pause = Pause.get("channel", 0))
     
     # Default integration time
-    Handler[f"{Name}integrationTime"] = lab.handle(f"{Name}integrationTime", TimeTagger.setDefaultIntegrationTime, Overwrites = Overwrites.get("integrationTime", []))
+    Handler[f"{Name}integrationTime"] = lab.handle(f"{Name}integrationTime", TimeTagger.setDefaultIntegrationTime, Overwrites = Overwrites.get("integrationTime", []), Pause = Pause.get("integrationTime", 0))
     
     # Clock channel
-    Handler[f"{Name}clockChannel"] = lab.handle(f"{Name}clockChannel", TimeTagger.setClockChannel, Overwrites = Overwrites.get("clockChannel", []))
+    Handler[f"{Name}clockChannel"] = lab.handle(f"{Name}clockChannel", TimeTagger.setClockChannel, Overwrites = Overwrites.get("clockChannel", []), Pause = Pause.get("clockChannel", 0))
     
     # Bin width
-    Handler[f"{Name}binWidth"] = lab.handle(f"{Name}binWidth", TimeTagger.setBinWidth, Overwrites = Overwrites.get("binWidth", []))    
+    Handler[f"{Name}binWidth"] = lab.handle(f"{Name}binWidth", TimeTagger.setBinWidth, Overwrites = Overwrites.get("binWidth", []), Pause = Pause.get("binWidth", 0))    
     
     # Correlation bins
-    Handler[f"{Name}correlationBins"] = lab.handle(f"{Name}correlationBins", TimeTagger.setDefaultCorrelationBins, Overwrites = Overwrites.get("correlationBins", []) + [f"{Name}correlationTime"])    
+    Handler[f"{Name}correlationBins"] = lab.handle(f"{Name}correlationBins", TimeTagger.setDefaultCorrelationBins, Overwrites = Overwrites.get("correlationBins", []) + [f"{Name}correlationTime"], Pause = Pause.get("correlationBins", 0))    
     
     # Correlation time
     def SetCorrelationTime(Value, **kwargs):
@@ -206,7 +212,7 @@ def timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict()):
         # Set the correlation bins
         TimeTagger.setDefaultCorrelationBins(float(Value) / BinWidth, **kwargs)
     
-    Handler[f"{Name}correlationTime"] = lab.handle(f"{Name}correlationTime", SetCorrelationTime, Overwrites = Overwrites.get("correlationTime", []) + [f"{Name}correlationBins"])    
+    Handler[f"{Name}correlationTime"] = lab.handle(f"{Name}correlationTime", SetCorrelationTime, Overwrites = Overwrites.get("correlationTime", []) + [f"{Name}correlationBins"], Pause = Pause.get("correlationTime", 0))    
     
     # The channels
     for i in range(1, ChannelCount + 1):
@@ -216,7 +222,7 @@ def timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict()):
                 TimeTagger.setTriggerLevel(Channel, Value, **kwargs)
             return function
                 
-        Handler[f"{Name}CH{i}.triggerLevel"] = lab.handle(f"{Name}CH{i}.triggerLevel", setTriggerLevel(i), Overwrites = Overwrites.get("CH{i}.triggerLevel", []))
+        Handler[f"{Name}CH{i}.triggerLevel"] = lab.handle(f"{Name}CH{i}.triggerLevel", setTriggerLevel(i), Overwrites = Overwrites.get(f"CH{i}.triggerLevel", []), Pause = Pause.get(f"CH{i}.triggerLevel", 0))
     
         # Trigger mode
         def setTriggerMode(Channel):
@@ -224,7 +230,7 @@ def timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict()):
                 TimeTagger.setTriggerMode(Channel, Value, **kwargs)
             return function
                 
-        Handler[f"{Name}CH{i}.triggerMode"] = lab.handle(f"{Name}CH{i}.triggerMode", setTriggerMode(i), Overwrites = Overwrites.get("CH{i}.triggerMode", []))
+        Handler[f"{Name}CH{i}.triggerMode"] = lab.handle(f"{Name}CH{i}.triggerMode", setTriggerMode(i), Overwrites = Overwrites.get(f"CH{i}.triggerMode", []), Pause = Pause.get(f"CH{i}.triggerMode", 0))
     
         # Dead time
         def setDeadTime(Channel):
@@ -232,7 +238,7 @@ def timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict()):
                 TimeTagger.setDeadTime(Channel, Value, **kwargs)
             return function
         
-        Handler[f"{Name}CH{i}.deadTime"] = lab.handle(f"{Name}CH{i}.deadTime", setDeadTime(i), Overwrites = Overwrites.get("CH{i}.deadTime", []))
+        Handler[f"{Name}CH{i}.deadTime"] = lab.handle(f"{Name}CH{i}.deadTime", setDeadTime(i), Overwrites = Overwrites.get(f"CH{i}.deadTime", []), Pause = Pause.get(f"CH{i}.deadTime", 0))
     
         # Input delay
         def setDelay(Channel):
@@ -240,7 +246,7 @@ def timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict()):
                 TimeTagger.setChannelDelay(Channel, Value, **kwargs)
             return function
         
-        Handler[f"{Name}CH{i}.delay"] = lab.handle(f"{Name}CH{i}.delay", setDelay(i), Overwrites = Overwrites.get("CH{i}.delay", []))
+        Handler[f"{Name}CH{i}.delay"] = lab.handle(f"{Name}CH{i}.delay", setDelay(i), Overwrites = Overwrites.get(f"CH{i}.delay", []), Pause = Pause.get(f"CH{i}.delay", 0))
     
     return Handler
     
@@ -250,7 +256,8 @@ def timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict()):
 # ChannelCount (int): The number of channels accessable
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
-def photonSpot(SNSPD, ChannelCount, Name = "", Overwrites = dict()):
+# Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
+def photonSpot(SNSPD, ChannelCount, Name = "", Overwrites = dict(), Pause = dict()):
     from .. import lab
     from .. import controllers as c
     
@@ -267,7 +274,7 @@ def photonSpot(SNSPD, ChannelCount, Name = "", Overwrites = dict()):
                 SNSPD.setBias(Channel, Value, **kwargs)
             return function
             
-        Handler[f"{Name}{i}.bias"] = lab.handle(f"{Name}{i}.bias", setBiasCurrent(i), Overwrites = Overwrites.get("{i}.bias", []))
+        Handler[f"{Name}{i}.bias"] = lab.handle(f"{Name}{i}.bias", setBiasCurrent(i), Overwrites = Overwrites.get(f"{i}.bias", []), Pause = Pause.get(f"{i}.bias", 0))
     
     return Handler
 
@@ -278,7 +285,8 @@ def photonSpot(SNSPD, ChannelCount, Name = "", Overwrites = dict()):
 # SequenceArgs (tuple): The first arguments to give the sequence function 
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
-def timeBandit(FPGA, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = dict()):
+# Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
+def timeBandit(FPGA, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = dict(), Pause = dict()):
     from .. import lab
     from .. import equipment as q
     
@@ -294,7 +302,7 @@ def timeBandit(FPGA, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = 
         Sequences[SplitValue[0]](*SequenceArgs, *SplitValue[1:]).apply(**kwargs)
         FPGA.show()
         
-    Handler[f"{Name}.sequence"] = lab.handle(f"{Name}.sequence", setSequence, Overwrites = Overwrites.get("{i}.sequence", []))
+    Handler[f"{Name}.sequence"] = lab.handle(f"{Name}.sequence", setSequence, Overwrites = Overwrites.get("sequence", []), Pause = Pause.get("sequence", 0))
 
     return Handler
 
@@ -305,7 +313,8 @@ def timeBandit(FPGA, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = 
 # SequenceArgs (tuple): The first arguments to give the sequence function 
 # Name (str): The name in from of each setting
 # Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
-def AWG(Device, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = dict()):
+# Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
+def AWG(Device, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = dict(), Pause = dict()):
     from .. import lab
     from .. import equipment as q
     
@@ -321,7 +330,7 @@ def AWG(Device, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = dict(
         Sequences[SplitValue[0]](*SequenceArgs, *SplitValue[1:]).apply(**kwargs)
         Device.show()
         
-    Handler[f"{Name}.sequence"] = lab.handle(f"{Name}.sequence", setSequence, Overwrites = Overwrites.get("{i}.sequence", []))
+    Handler[f"{Name}.sequence"] = lab.handle(f"{Name}.sequence", setSequence, Overwrites = Overwrites.get("sequence", []), Pause = Pause.get("sequence", 0))
 
     return Handler
 

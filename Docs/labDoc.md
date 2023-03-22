@@ -550,6 +550,20 @@ Load settings from a file
 - Relative (bool): If True then the path will be relative to the current directory
 
 ---
+
+### method addPause(Time)
+
+Notes down when the pause is done
+
+- Time (float): The time from now to do the pause
+
+---
+
+### method pause()
+
+Does the pausing making sure that all pauses are respected
+
+---
 ---
 
 ## settingHandler()
@@ -588,13 +602,14 @@ Applies all the settings with a specific order
 ---
 ---
 
-## handle(Key, Function, Overwrites = [], Order = None)
+## handle(Key, Function, Overwrites = [], Pause = 0, Order = None)
 
 A handle for handling a setting
 
 - Key (str): The key for this handle
 - Function (callable): The function to run the handle, must take inputs (Value, UseQueue = True)
 - Overwrites (list of str): A list of all the settings to delete when handling a setting
+- Pause (float): The time to pause after applying this setting
 - Order (int): If not None then it will wait until the end of the settings and then apply all the rest in order from lowest to highest
 
 ---

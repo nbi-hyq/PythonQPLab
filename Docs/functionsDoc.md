@@ -190,7 +190,7 @@ A collection of functions to create setting handlers for various devices, all se
 
 ---
 
-## keithly(Keithly, Name = "", Overwrites = dict())
+## keithly(Keithly, Name = "", Overwrites = dict(), Pause = dict())
 
 Creates a setting handler for a keithly
 
@@ -206,13 +206,14 @@ Function arguments:
 - Keithly (controllers.keithly): The keithly device to control
 - Name (str): The name in from of each setting
 - Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
+- Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
 
 Returns the settings handler as a lab.settingHandler
 
 ---
 ---
 
-## laser(Laser, Lockable = True, Name = "", Overwrites = dict())
+## laser(Laser, Lockable = True, Name = "", Overwrites = dict(), Pause = dict())
 
 Creates a setting handler for a laser
 
@@ -227,13 +228,14 @@ Function arguments:
 - Lockable (bool): If false then it will not try to lock the frequence
 - Name (str): The name in from of each setting
 - Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
+- Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
 
 Returns the settings handler as a lab.settingHandler
 
 ---
 ---
 
-## power(PowerControl, Name = "", Overwrites = dict())
+## power(PowerControl, Name = "", Overwrites = dict(), Pause = dict())
 
 Creates a setting handler for a power controller
 
@@ -247,13 +249,14 @@ Function arguments:
 - PowerControl (equipment.powerControl): The power controller to control
 - Name (str): The name in from of each setting
 - Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
+- Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
 
 Returns the settings handler as a lab.settingHandler
 
 ---
 ---
 
-## PCLaser(Laser, Lockable = True, Name = "", Overwrites = dict())
+## PCLaser(Laser, Lockable = True, Name = "", Overwrites = dict(), Pause = dict())
 
 Creates a setting handler for a power controlled laser
 
@@ -269,13 +272,14 @@ Function arguments:
 - Lockable (bool): If false then it will not try to lock the frequence
 - Name (str): The name in from of each setting
 - Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
+- Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
 
 Returns the settings handler as a lab.settingHandler
 
 ---
 ---
 
-## rotationStage(RotationStage, Name = "", Overwrites = dict())
+## rotationStage(RotationStage, Name = "", Overwrites = dict(), Pause = dict())
 
 Creates  a setting handler for a rotation stage
 
@@ -289,13 +293,14 @@ Function arguments:
 - RotationStage (controllers.rotationStage): The stage to control
 - Name (str): The name in from of each setting
 - Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
+- Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
 
 Returns the settings handler as a lab.settingHandler
 
 ---
 ---
 
-## timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict())
+## timeTagger(TimeTagger, ChannelCount, Name = "", Overwrites = dict(), Pause = dict())
 
 Creates a setting handler for a time tagger
 
@@ -318,15 +323,16 @@ Function arguments:
 - ChannelCount (int): The number of channels accessable
 - Name (str): The name in from of each setting
 - Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
+- Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
 
 Returns the settings handler as a lab.settingHandler
 
 ---
 ---
 
-## SNSPD(SNSPD, ChannelCount, Name = "", Overwrites = dict())
+## photonSpot(SNSPD, ChannelCount, Name = "", Overwrites = dict(), Pause = dict())
 
-Creates a setting handler for a SNSPD
+Creates a setting handler for a Photon Spot SNSPD
 
 The possible settings include:
 
@@ -338,13 +344,14 @@ Function arguments:
 - ChannelCount (int): The number of channels accessable
 - Name (str): The name in from of each setting
 - Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
+- Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
 
 Returns the settings handler as a lab.settingHandler
 
 ---
 ---
 
-## timeBandit(FPGA, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = dict())
+## timeBandit(FPGA, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = dict(), Pause = dict())
 
 Creates a setting handler for a timeBandit FPGA
 
@@ -359,13 +366,14 @@ Function arguments:
 - SequenceArgs (tuple): The first arguments to give the sequence function 
 - Name (str): The name in from of each setting
 - Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
+- Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
 
 Returns the settings handler as a lab.settingHandler
 
 ---
 ---
 
-## AWG(Device, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = dict())
+## AWG(Device, Sequences, SequenceArgs = tuple(), Name = "", Overwrites = dict(), Pause = dict())
 
 Creates a setting handler for an AWG
 
@@ -380,6 +388,7 @@ Function arguments:
 - SequenceArgs (tuple): The first arguments to give the sequence function 
 - Name (str): The name in from of each setting
 - Overwrites (dict of list of str): A dict containing the lists of overwrites for each handler
+- Pause (dict of floats): A dict containing the time to pause after setting each parameter, defaults to 0
 
 Returns the settings handler as a lab.settingHandler
 
