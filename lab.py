@@ -260,7 +260,7 @@ class setting(baseSetting):
     # Does the pausing making sure that all pauses are respected
     def pause(self):
         import time
-        from .. import functions as f
+        from . import functions as f
         
         Time = self._sleepTime - time.time()
         
