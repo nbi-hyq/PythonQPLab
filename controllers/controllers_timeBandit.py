@@ -512,14 +512,14 @@ class timeBandit(c.serial):
     # Empty (bool): If True then it will not communicate with the device
     # DeviceName (str): The name of the device, only used for error messages
     # ID (str): The ID name for the device, only used for displaying infomation
-    def __init__(self, TimeCalibration, PhaseCalibration, *args, Channel = 1, ClockFrequency = 50e6, ClocksPerBase = 4, **kwargs):
+    def __init__(self, Port, TimeCalibration, PhaseCalibration, *args, Channel = 1, ClockFrequency = 50e6, ClocksPerBase = 4, **kwargs):
         if not "DeviceName" in kwargs:
             kwargs["DeviceName"] = "TimeBandit"
             
         kwargs["Baudrate"] = 115200
         kwargs["BytesMode"] = True
         
-        super().__init__(*args, **kwargs)
+        super().__init__(Port, *args, **kwargs)
                 
         self._intTime = 0.1
         self._sequenceLength = 2
