@@ -18,6 +18,7 @@ class laser:
             self._wavelengthRange = (float(WavelengthRange[0]), float(WavelengthRange[1]))
 
         self.voltageBase = (self._voltageRange[0] + self._voltageRange[1]) / 2
+        self._voltage = self.voltageBase
 
     # Converts a frequency in THz to a wavelength in nm
     # Value (float): The frequency to convert        

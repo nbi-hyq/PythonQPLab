@@ -138,6 +138,8 @@ class laser(device):
                 Stable = True
                 break
             
+            IlligalVoltage = False
+            
             # Try with piezo
             for _ in range(self._piezoAttempts):                
                 # Make sure the slope is valid
@@ -150,8 +152,15 @@ class laser(device):
                 
                 # Make sure it is legal
                 if not self.laser.voltageAllowed(NewVoltage):
-                    print(f"Requested illigal voltage of {NewVoltage:.1f}, using grating to compensate for drift of {self.deviceName}")
-                    break
+                    if IlligalVoltage:
+                        print(f"Requested illigal voltage of {NewVoltage:.1f}, using grating to compensate for drift of {self.deviceName}")
+                        break
+                    
+                    IlligalVoltage = True
+                    NewVoltage = max(min(NewVoltage, self.laser._voltageRange[1]), self.laser._voltageRange[0])
+                
+                else:
+                    IlligalVoltage = False
                 
                 # Set new voltage
                 self.laser.setVoltage(NewVoltage)
@@ -168,7 +177,7 @@ class laser(device):
                     
                 else:
                     self._lockSlope = (self._lockSlopeRange[0] + self._lockSlopeRange[1]) / 2
-                
+
                 # Find the true frequency difference and check if it has been set correctly
                 DiffFrequency = self._lockFrequency - (NewDiffFrequency + (self._lockFrequency - DiffFrequency))
             
@@ -182,11 +191,19 @@ class laser(device):
             # Set the frequency
             if i < self._jumpAttempts:
                 print(f"Using grating to compensate for drift for {self.deviceName}")
+                
+                # Set new voltage
+                self.laser.setVoltage(self.laser.voltageBase)
+                
+                # Wait
+                f.time.sleep(self._lockWait)
+                
+                # Set frequency
                 self.setFrequency(self._lockFrequency, **kwargs)
             
         # Tell if it did not work
         if not Stable:
-            print(f"Unable to lock {self.deviceName}")
+            print(f"Unable to lock {self.deviceName} frequency to {self._lockFrequency}")
     
     # Locks the frequency
     # UseQueue (bool): Whether to run the command through the queue or not, ignored if the device was initialized with UseQueue = False

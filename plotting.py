@@ -191,10 +191,10 @@ class histogram(livePlot):
             self._gateLinesSub = [self._axGates[i].plot(np.zeros(History), np.zeros(History), "-", color = "yellow")[0] for i in range(GateCount)]
         
         self._gateValues = [np.zeros(History) for _ in range(GateCount)]
-        self._gateValuesBack = None
+        self._gateValuesBack = [None] * GateCount
         if BackgroundMode in ["on", "subtract"]:
             self._gateValuesBack = [np.zeros(History) for _ in range(GateCount)]
-        self._gateValuesSub = None
+        self._gateValuesSub = [None] * GateCount
         if BackgroundMode == "subtract":
             self._gateValuesSub = [np.zeros(History) for _ in range(GateCount)]
         
@@ -381,7 +381,7 @@ class plot(livePlot):
 
         # Make sure the size is not too low
         self._pos = 0
-        
+                
         # Create plots and save arrays
         self._values = []
         self._valuesBack = []
@@ -512,14 +512,14 @@ class plot(livePlot):
                         if MaxValues[ID] is None or MaxValues[ID] < NewMax:
                             MaxValues[ID] = NewMax
                                    
-            MinX = self._x[-self._pos]
-            MaxX = self._x[-1]
+            MinX = np.min(self._x[-self._pos:])
+            MaxX = np.max(self._x[-self._pos:])
             
             if MinX == MaxX:
                 MinX -= 1
                 MaxX += 1
 
-            for Ax, Min, Max, Buffer  in zip(self.axes, MinValues, MaxValues, self._showBuffers):
+            for Ax, Min, Max, Buffer in zip(self.axes, MinValues, MaxValues, self._showBuffers):
                 if Min == Max:
                     Min -= 1
                     Max += 1
