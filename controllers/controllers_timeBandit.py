@@ -201,7 +201,7 @@ class FPGAChannel:
     # SequenceLength (int): The length of the sequence in input clock cycles, if None then the current length will be used
     # Calibrating (bool); If True then it will create calibration pulses
     def generateStateWithDuration(self, Start, Duration, **kwargs):
-        return self.generateBaseState(float(Start) * 1e-9 * self.FPGA.getClockFrequency() * self.FPGA.getClocksPerBase(), float(Duration) * 1e-9 * self.FPGA.getClockFrequency() * self.FPGA.getClocksPerBase(), **kwargs)
+        return self.generateBaseStateWithDuration(float(Start) * 1e-9 * self.FPGA.getClockFrequency() * self.FPGA.getClocksPerBase(), float(Duration) * 1e-9 * self.FPGA.getClockFrequency() * self.FPGA.getClocksPerBase(), **kwargs)
 
     # Generates a single pulse
     # Start (float): The start time in clock cycles, will be rounded down to nearest clock cycle
@@ -236,7 +236,7 @@ class FPGAChannel:
     def generateBaseStateWithDuration(self, Start, Duration, SequenceLength = None, Calibrating = None):
         import numpy as np
         
-        if SequenceLength() is None:
+        if SequenceLength is None:
             SequenceLength = self.FPGA.getSequenceLength()
 
         if Calibrating is None:
