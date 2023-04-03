@@ -94,7 +94,7 @@ def power(PowerControl, Name = "", Overwrites = dict(), Pause = dict()):
             PowerControl.lock(**kwargs)
             
         else:
-            PowerControl.off(**kwargs)
+            PowerControl.unlock(**kwargs)
             
     Handler[f"{Name}active"] = lab.handle(f"{Name}active", Activate, Overwrites = Overwrites.get("active", []), Pause = Pause.get("active", 0), Order = 0)
     
@@ -139,7 +139,7 @@ def PCLaser(Laser, Lockable = True, Name = "", Overwrites = dict(), Pause = dict
         else:
             if Lockable:
                 Laser.laser.unlock()
-            Laser.power.off(**kwargs)
+            Laser.power.unlock(**kwargs)
             
     Handler[f"{Name}active"] = lab.handle(f"{Name}active", Activate, Overwrites = Overwrites.get("active", []), Pause = Pause.get("active", 0), Order = 0)
     

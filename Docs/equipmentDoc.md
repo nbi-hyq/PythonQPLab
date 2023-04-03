@@ -223,6 +223,14 @@ Locks the power
 
 ---
 
+### method lock(UseQueue = True)
+
+Unlocks the power and sets it to 0
+
+- UseQueue (bool): Whether to run the command through the queue or not, ignored if the device was initialized with UseQueue = False
+
+---
+
 ### method off(UseQueue = True)
 
 Turns the PID off
@@ -233,7 +241,7 @@ Turns the PID off
 
 ### method setSetPower(Power)
 
-Sets the setpoint of the PID, it must also be locked afterwards
+Sets the setpoint of the PID, it must also be locked afterwards if it is not locked already
 
 - Power (float): The power to set
 

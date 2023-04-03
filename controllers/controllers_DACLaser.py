@@ -29,6 +29,8 @@ class DACLaser(laser, c.deviceBase): # If used with the equipment.laser remember
         self._DAC = DACController
         self._channel = int(Channel)
         
+        self.setVoltage(self.voltageBase)
+        
     # This cannot set the wavelength
     # Value (float): The value of the wavelength
     def setWavelength(self, Value, **kwargs):

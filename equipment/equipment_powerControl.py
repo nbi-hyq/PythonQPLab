@@ -48,7 +48,7 @@ class powerControl(device):
         self._setPower = 0
         self.maxOutput = self.PID.maxOutput
         self.minOutput = self.PID.minOutput
-        self.lock()
+        self.unlock()
         
         # Initialize cache
         self.clearCache()
@@ -74,6 +74,7 @@ class powerControl(device):
         from .. import functions as f
         
         Value = self._setPower
+        self._locking = True
         
         # Disable autorange
         self.setAutoRange(False, **kwargs)
@@ -131,6 +132,10 @@ class powerControl(device):
         
         else:
             raise e.LockError(f"AOM {self.deviceName}", self)
+            
+    def unlock(self, **kwargs):
+        self.PID.setVoltageOut(0, **kwargs)
+        self._locking = False
     
     # Turns the PID off
     # UseQueue (bool): Whether to run the command through the queue or not, ignored if the device was initialized with UseQueue = False
@@ -140,8 +145,11 @@ class powerControl(device):
         
     # Sets the setpoint of the PID, it must also be locked afterwards
     # Power (float): The power to set
-    def setSetPower(self, Power):
+    def setSetPower(self, Power, **kwargs):
         self._setPower = float(Power)
+        
+        if self._locking:
+            self.lock(**kwargs)
     
     # Get the setpoint of the PID
     def getSetPower(self):
