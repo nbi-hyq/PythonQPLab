@@ -6,3 +6,4 @@ from . import lab
 from . import loggers
 from . import exceptions
 from . import plotting
+from . import optimize

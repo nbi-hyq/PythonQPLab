@@ -8,10 +8,10 @@ class PID(device):
     # WhiteSpaceOut (float): Defines the default white space for the output when plotting    
     # DeviceName (str): The name of the device
     # ID (str): The ID name for the device, only used for displaying infomation
-    def __init__(self, Device, *args, WhiteSpaceIn = 0.1, WhiteSpaceOut = 0.1, **kwargs):
-        from .. import controllers
+    def __init__(self, Device, *args, WhiteSpaceIn = 0.1, WhiteSpaceOut = 0.1, ControlMethod = 1, **kwargs):
         from .. import loggers
         from .. import interface
+        from .. import optimize
         
         if not "DeviceName" in kwargs:
             kwargs["DeviceName"] = "TempArduino"
@@ -26,8 +26,14 @@ class PID(device):
         self._whiteSpaceIn = float(WhiteSpaceIn)
         self._whiteSpaceOut = float(WhiteSpaceOut)
         
+        if ControlMethod > 0:
+            MaxOutput = Device.maxOutput
+        else:
+            MaxOutput = Device.minOutput
+        
         # Initialize the logger
         self.logger = loggers.PIDLogger(self.logDataRetriever)
+        self.optimizer = optimize.PIDOptimizer(Device, self.logger, MaxOutput)
         
     # Retrieves the PID data for the logger: SignalIn, SetPoint, SignalOut, this must be defined
     def logDataRetriever(self):
